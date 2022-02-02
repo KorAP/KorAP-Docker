@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b504738_725c8902",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19
+      },
+      "writtenOn": "2022-02-02T10:57:31Z",
+      "side": 1,
+      "message": "This obviously requires someone to have an index at hand - so before we add the preprocessing pipeline it\u0027s not really usefull. It\u0027s a working starting point though.",
+      "revId": "b03d67b0ae7bb150929d1ee1ce6c57e872e1e5f5",
+      "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
+    }
+  ]
+}
