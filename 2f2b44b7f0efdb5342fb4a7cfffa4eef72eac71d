@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3acbdaf1_8b0411db",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19
+      },
+      "writtenOn": "2022-04-03T19:52:44Z",
+      "side": 1,
+      "message": "Das Docker-Compose ist jetzt fertig und kann so veröffentlicht werden. Allerdings finde ich DCK sehr unschön - optisch. Die Annotation entspricht auch nicht mehr der ursprünglichen Konvertierung, die Peter durchgeführt hatte, weshalb die Inline-Annotationen so nicht übernommen werden können. Ich könnte die Annotationen im Ursprungsfile ändern (da ich sie nicht im Docker ändern kann), aber ein unproblematischeres Korpus wäre mir lieber.",
+      "revId": "2f2b44b7f0efdb5342fb4a7cfffa4eef72eac71d",
+      "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
+    }
+  ]
+}
