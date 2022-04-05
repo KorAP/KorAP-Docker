@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5bb29ce3_e515a614",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19
+      },
+      "writtenOn": "2022-04-05T12:52:45Z",
+      "side": 1,
+      "message": "Es wäre schön, wenn Ihr ein kurzes Lizenz-Snippet zum DCK schreiben könntet.",
+      "revId": "0d5bd665dd69f3040c7303d23100a5a7e9ab4c64",
+      "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
+    }
+  ]
+}
