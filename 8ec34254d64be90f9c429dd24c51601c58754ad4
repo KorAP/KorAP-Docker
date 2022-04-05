@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7bddfb31_621e45fe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19
+      },
+      "writtenOn": "2022-04-05T10:07:21Z",
+      "side": 1,
+      "message": "Ich habe DCK jetzt wieder in den Zustand gebracht, in den Peter es konvertiert hatte. Außerdem alle \"part\" Attribute und ids rausgeworfen. Es ist nachwievor nicht hübsch, wegen der vielen nicht-sprachlichen Teile und dem Whitespace-Handling, aber ich schätze, so geht es.",
+      "revId": "8ec34254d64be90f9c429dd24c51601c58754ad4",
+      "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
+    }
+  ]
+}
