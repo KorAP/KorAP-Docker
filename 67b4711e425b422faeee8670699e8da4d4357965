@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1c8d3fa_744fae7d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6
+      },
+      "writtenOn": "2022-05-29T08:25:06Z",
+      "side": 1,
+      "message": "Tested on Fedora 36 (enforcing), CentOS 7.9, Ubuntu 22.04 (not enforcing)\n\n",
+      "revId": "67b4711e425b422faeee8670699e8da4d4357965",
+      "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
+    }
+  ]
+}
