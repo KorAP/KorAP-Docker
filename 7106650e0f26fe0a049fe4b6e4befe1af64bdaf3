@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bfe42fce_83901cd1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6
+      },
+      "writtenOn": "2022-05-29T10:35:23Z",
+      "side": 1,
+      "message": "Already tested an older version on GH, see https://github.com/morckx/KorAP-Docker/runs/6642684096?check_suite_focus\u003dtrue",
+      "revId": "7106650e0f26fe0a049fe4b6e4befe1af64bdaf3",
+      "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
+    }
+  ]
+}
