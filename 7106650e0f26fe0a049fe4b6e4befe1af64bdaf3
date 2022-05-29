@@ -16,6 +16,23 @@
       "message": "Already tested an older version on GH, see https://github.com/morckx/KorAP-Docker/runs/6642684096?check_suite_focus\u003dtrue",
       "revId": "7106650e0f26fe0a049fe4b6e4befe1af64bdaf3",
       "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "61feffd9_c830b806",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19
+      },
+      "writtenOn": "2022-05-29T21:45:00Z",
+      "side": 1,
+      "message": "I would submit, but it\u0027s not an independent commit.",
+      "revId": "7106650e0f26fe0a049fe4b6e4befe1af64bdaf3",
+      "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
     }
   ]
 }
