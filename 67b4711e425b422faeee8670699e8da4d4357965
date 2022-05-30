@@ -51,6 +51,41 @@
       "parentUuid": "daff5a9f_a79e2674",
       "revId": "67b4711e425b422faeee8670699e8da4d4357965",
       "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8163b4d7_1043ba7a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6
+      },
+      "writtenOn": "2022-05-30T06:59:52Z",
+      "side": 1,
+      "message": "It\u0027s also required for reading on Fedora 35 and 36 – maybe depending on SELinux setting. It doesn\u0027t work without :z also in the compose file.",
+      "parentUuid": "daff5a9f_a79e2674",
+      "revId": "67b4711e425b422faeee8670699e8da4d4357965",
+      "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8c422a1_68234881",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6
+      },
+      "writtenOn": "2022-05-30T06:59:52Z",
+      "side": 1,
+      "message": "Sorry, forgot to submit my comment.",
+      "revId": "67b4711e425b422faeee8670699e8da4d4357965",
+      "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
     }
   ]
 }
