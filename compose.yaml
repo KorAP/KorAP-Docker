@@ -6,9 +6,66 @@ services:
       - "64543:64543"
     environment:
       KALAMAR_API: "http://kustvakt:8089/api/"
+    depends_on:
+      - kustvakt
+    profiles:
+      - lite
+  full-init:
+    image: "korap/kalamar:latest-conv"
+    command: super_client_info kalamar /kalamar/data/super_client_info
+    volumes:
+      - type: bind
+        source: "${PWD}"
+        target: "/kalamar/data"
+    profiles:
+      - full
+      - init
+    user: root
+  kalamar-full:
+    image: "korap/kalamar:latest-conv"
+    ports:
+      - "64543:64543"
+    environment:
+      KALAMAR_API: "http://kustvakt:8089/api/"
+    configs:
+      - source: super_client_info
+        target: /kalamar/super_client_info
+        mode: 0555
+    volumes:
+      - type: bind
+        source: "${PWD}/kalamar.production.conf"
+        target: "/kalamar/kalamar.production.conf"
+        readonly: true
+    depends_on:
+      kustvakt-full:
+        condition: service_started
+      full-init:
+        condition: service_completed_successfully
+    profiles:
+      - full
   kustvakt:
     image: "korap/kustvakt:latest"
     expose:
       - "8089"
     volumes:
       - "${INDEX}:/kustvakt/index:z"
+    profiles:
+      - lite
+  kustvakt-full:
+    image: "korap/kustvakt-full:latest"
+    expose:
+      - "8089"    
+    volumes:
+      - "${INDEX}:/kustvakt/index:z"
+    profiles:
+      - full
+    configs:
+      - source: super_client_info
+        target: /kustvakt/client/super_client_info
+        mode: 0555
+    depends_on:
+      full-init:
+        condition: service_completed_successfully
+configs:
+  super_client_info:
+    external: true
