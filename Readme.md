@@ -28,11 +28,34 @@ To download, intialize and run KorAP pointing to an existing index
 (in this example `index` in the local directory), run
 
 ```shell
-$ INDEX=./index docker-compose up
+$ INDEX=./index docker-compose --profile=lite up
 ```
 
 This will make the frontend be available at
 `localhost:64543`.
+
+To run the service with an additional user management system,
+start the service with
+
+```shell
+$ INDEX=./index docker-compose --profile=full up
+```
+
+This will generate a file called `super_client_info` in the
+current directory that acts as a shared secret between the frontend and the backend.
+To enable this in Kalamar, the configuration file `kalamar.production.conf`
+needs to point to the mounted file, so it requires a configuration along the lines of
+
+```perl
+{
+    Kalamar => {
+        plugins  => ['Auth']
+    },
+    'Kalamar-Auth' => {
+        client_file => '/kalamar/super_client_info'
+    }
+}
+```
 
 
 ## Corpus Conversion
