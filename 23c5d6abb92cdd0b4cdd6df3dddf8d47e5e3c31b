@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1ec3b56_00348c62",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19
+      },
+      "writtenOn": "2022-11-21T15:39:01Z",
+      "side": 1,
+      "message": "This is not yet finished - just a first test for creating a docker compose arrangement that preferably allows to create the required configurations in an init phase.",
+      "revId": "23c5d6abb92cdd0b4cdd6df3dddf8d47e5e3c31b",
+      "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
+    }
+  ]
+}
