@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69eb871d_e4ec7745",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19
+      },
+      "writtenOn": "2022-11-22T16:10:11Z",
+      "side": 1,
+      "message": "Fine for review now, but requires Kalamar including the super_client_info command, which is not yet on docker hub.",
+      "revId": "6a20e7e06e93cd335681c479e4d6e871fc588938",
+      "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
+    }
+  ]
+}
