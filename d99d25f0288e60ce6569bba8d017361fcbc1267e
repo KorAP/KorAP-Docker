@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "917702fa_532ad9a7",
+        "filename": "Readme.md",
+        "patchSetId": 12
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 6
+      },
+      "writtenOn": "2022-11-30T18:23:59Z",
+      "side": 1,
+      "message": "When I replace localhost with my IP address everything works.",
+      "range": {
+        "startLine": 52,
+        "startChar": 28,
+        "endLine": 52,
+        "endChar": 37
+      },
+      "revId": "d99d25f0288e60ce6569bba8d017361fcbc1267e",
+      "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
+    }
+  ]
+}
