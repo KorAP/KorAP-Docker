@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5030181d_77c06158",
+        "filename": "compose.yaml",
+        "patchSetId": 7
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 6
+      },
+      "writtenOn": "2022-11-30T14:25:38Z",
+      "side": 1,
+      "message": "$PWD cannot be mounted with fedora docker, but $PWD/client can. Can you fix the paths? I\u0027m having a hard time...",
+      "revId": "0901114fa8a494d7acc26fc684227c3cfc08a666",
+      "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
+    }
+  ]
+}
