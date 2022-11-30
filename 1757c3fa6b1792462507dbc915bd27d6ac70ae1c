@@ -16,6 +16,24 @@
       "message": "Property readonly is not allowed.yaml-schema",
       "revId": "1757c3fa6b1792462507dbc915bd27d6ac70ae1c",
       "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66ff367a_b20db344",
+        "filename": "compose.yaml",
+        "patchSetId": 6
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 19
+      },
+      "writtenOn": "2022-11-30T14:21:28Z",
+      "side": 1,
+      "message": "Ulkig - erzeugt bei mir nun auch einen Fehler ...",
+      "parentUuid": "5a209bc9_e3639c13",
+      "revId": "1757c3fa6b1792462507dbc915bd27d6ac70ae1c",
+      "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
     }
   ]
 }
