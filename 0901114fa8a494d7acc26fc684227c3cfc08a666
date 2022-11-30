@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fec48987_d4a87977",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6
+      },
+      "writtenOn": "2022-11-30T14:41:24Z",
+      "side": 1,
+      "message": "See also https://stackoverflow.com/questions/46192070/docker-compose-ignores-configs-section",
+      "revId": "0901114fa8a494d7acc26fc684227c3cfc08a666",
+      "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5030181d_77c06158",
         "filename": "compose.yaml",
         "patchSetId": 7
