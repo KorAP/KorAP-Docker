@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1863386e_4853bd31",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6
+      },
+      "writtenOn": "2022-11-30T14:40:31Z",
+      "side": 1,
+      "message": "Ah, maybe this is my problem:\n\n```\n$ INDEX\u003d./index docker-compose --profile\u003dfull up\nWARNING: Some services (kalamar-full, kustvakt-full) use the \u0027configs\u0027 key, which will be ignored. Compose does not support \u0027configs\u0027 configuration - use `docker stack deploy` to deploy to a swarm.\n```",
+      "revId": "0901114fa8a494d7acc26fc684227c3cfc08a666",
+      "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5030181d_77c06158",
