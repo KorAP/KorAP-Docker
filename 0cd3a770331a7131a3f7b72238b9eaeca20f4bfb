@@ -33,6 +33,24 @@
       "message": "Maybe add this as an example configuration file? We will need this anyway for the CI test.",
       "revId": "0cd3a770331a7131a3f7b72238b9eaeca20f4bfb",
       "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "061786a0_32f32094",
+        "filename": "Readme.md",
+        "patchSetId": 13
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 19
+      },
+      "writtenOn": "2022-12-01T13:12:46Z",
+      "side": 1,
+      "message": "I was thinking about having a \"generate config\" command in Kalamar, but I think, that\u0027s not the best approach.\n\nBecause only these two parameters are required, I would say, it\u0027s probably better to have an environment variable activating the auth plugin and the auth plugin automatically loading the super_client_info file from the /kalamar/ folder, unless any other value is given.\n\nBut this should happen aside from this commit, because it requires changes in the Kalamar Auth plugin.\n\nThis commit, however, still requires Kustvakt-full on docker hub. I will prepare this now.",
+      "parentUuid": "2e131e04_975f8b02",
+      "revId": "0cd3a770331a7131a3f7b72238b9eaeca20f4bfb",
+      "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
     }
   ]
 }
