@@ -16,6 +16,23 @@
       "message": "works fine for me now with docker-compose 1 and 2 and docker 20.10.20",
       "revId": "0cd3a770331a7131a3f7b72238b9eaeca20f4bfb",
       "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e131e04_975f8b02",
+        "filename": "Readme.md",
+        "patchSetId": 13
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 6
+      },
+      "writtenOn": "2022-12-01T07:01:24Z",
+      "side": 1,
+      "message": "Maybe add this as an example configuration file? We will need this anyway for the CI test.",
+      "revId": "0cd3a770331a7131a3f7b72238b9eaeca20f4bfb",
+      "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
     }
   ]
 }
