@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "83066aab_3b85cdcb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19
+      },
+      "writtenOn": "2022-12-05T13:30:56Z",
+      "side": 1,
+      "message": "This may require a minimum version of docker-compose, though.",
+      "revId": "244749b52797ca4b85b5cf35a3537df57a6c0d7b",
+      "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
+    }
+  ]
+}
