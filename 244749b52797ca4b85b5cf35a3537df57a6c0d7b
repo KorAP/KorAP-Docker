@@ -16,6 +16,23 @@
       "message": "This may require a minimum version of docker-compose, though.",
       "revId": "244749b52797ca4b85b5cf35a3537df57a6c0d7b",
       "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f987d610_74e16cd1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6
+      },
+      "writtenOn": "2022-12-05T15:17:06Z",
+      "side": 1,
+      "message": "If rocky on kodi and ubuntu on github are fine, I\u0027m fine,too.",
+      "revId": "244749b52797ca4b85b5cf35a3537df57a6c0d7b",
+      "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
     }
   ]
 }
