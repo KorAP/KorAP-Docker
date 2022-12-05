@@ -31,9 +31,10 @@ services:
       - type: bind
         source: "${PWD}/kalamar.production.conf"
         target: "/kalamar/kalamar.production.conf"
-      - type: bind
-        source: "${PWD}/super_client_info"
+    configs:
+      - source: super_client_info
         target: /kalamar/super_client_info
+        mode: 0555
     depends_on:
       kustvakt-full:
         condition: service_started
@@ -55,9 +56,10 @@ services:
       - 8089
     volumes:
       - "${INDEX}:/kustvakt/index:z"
-      - type: bind
-        source: "${PWD}/super_client_info"
+    configs:
+      - source: super_client_info
         target: /kustvakt/client/super_client_info
+        mode: 0555
     profiles:
       - full
     depends_on:
@@ -65,4 +67,4 @@ services:
         condition: service_completed_successfully
 configs:
   super_client_info:
-    external: true
+    file: ./super_client_info

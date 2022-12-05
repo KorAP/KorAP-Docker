@@ -38,11 +38,10 @@ To run the service with an additional user management system,
 initialize and start the service with
 
 ```shell
-$ INDEX=./index docker-compose --profile=init up
 $ INDEX=./index docker-compose --profile=full up
 ```
 
-The init step creates a file called `super_client_info` in the
+This will generate a file called `super_client_info` in the
 current directory that acts as a shared secret between the frontend and the backend.
 To enable this in Kalamar, the configuration file `kalamar.production.conf`
 needs to point to the mounted file, so it requires a configuration along the lines of
