@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9e8c961_6af3e4d9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6
+      },
+      "writtenOn": "2022-12-05T06:19:30Z",
+      "side": 1,
+      "message": "Tested with docker-compose 1.29 and 2.13 and on kodi",
+      "revId": "11012e92e42120b8189d565961e694d4f4cebf3b",
+      "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
+    }
+  ]
+}
