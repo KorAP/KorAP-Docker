@@ -17,6 +17,8 @@ jobs:
         run: |
           mkdir index
           docker run -u root --rm -v ${PWD}:/data:z korap/kustvakt Krill-Indexer.jar -c /kustvakt/kustvakt-lite.conf -i /data/json -o /data/index/
+      - name: Create kalamar.production.conf
+        run: echo "{Kalamar=>{plugins=>['Auth']},'Kalamar-Auth'=>{client_file=>'/kalamar/super_client_info'}}" > kalamar.production.conf
       - name: Start KorAP - lite
         run: INDEX=./index docker-compose --profile=lite up -d
       - name: Wait until KorAP is up and running
