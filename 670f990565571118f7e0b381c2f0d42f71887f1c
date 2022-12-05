@@ -94,6 +94,30 @@
       },
       "revId": "670f990565571118f7e0b381c2f0d42f71887f1c",
       "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4d120cf_c5128c3d",
+        "filename": "Readme.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 6
+      },
+      "writtenOn": "2022-12-05T16:31:53Z",
+      "side": 1,
+      "message": "Let\u0027s drop this in my view crazy separation of Kustvakt lite and full some time 😂",
+      "parentUuid": "a368a1c7_2a4d836f",
+      "range": {
+        "startLine": 134,
+        "startChar": 41,
+        "endLine": 134,
+        "endChar": 46
+      },
+      "revId": "670f990565571118f7e0b381c2f0d42f71887f1c",
+      "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
     }
   ]
 }
