@@ -131,7 +131,7 @@ be used to index the JSON files:
 ```shell
 $ mkdir index
 $ docker run -u root --rm -v ${PWD}:/data:z korap/kustvakt \
-  Krill-Indexer.jar -c kustvakt-lite.conf \
+  Krill-Indexer.jar -c /kustvakt/kustvakt-lite.conf \
   -i /data/json -o /data/index/
 ```
 
