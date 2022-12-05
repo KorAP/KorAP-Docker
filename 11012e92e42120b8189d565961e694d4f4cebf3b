@@ -51,6 +51,23 @@
       "parentUuid": "4ec881ea_3f30a57a",
       "revId": "11012e92e42120b8189d565961e694d4f4cebf3b",
       "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e8e60b6_237602ef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19
+      },
+      "writtenOn": "2022-12-05T08:19:13Z",
+      "side": 1,
+      "message": "And did you try with compose version \"2.4\"? It\u0027s still supported and supports depends_on conditions.",
+      "revId": "11012e92e42120b8189d565961e694d4f4cebf3b",
+      "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
     }
   ]
 }
