@@ -17,14 +17,28 @@ jobs:
         run: |
           mkdir index
           docker run -u root --rm -v ${PWD}:/data:z korap/kustvakt Krill-Indexer.jar -c kustvakt-lite.conf -i /data/json -o /data/index/
-      - name: Start KorAP
-        run: INDEX=./index docker-compose up -d
+      - name: Start KorAP - lite
+        run: INDEX=./index docker-compose --profile=lite up -d
       - name: Wait until KorAP is up and running
-        run: count=0; while test $count -lt 25 && ! docker-compose logs | grep "Initiating Jersey"; do count=$((count+1)); echo "waiting ${count}s"; sleep 1; done; sleep 10
+        run: count=0; while test $count -lt 25 && ! INDEX=./index docker-compose --profile=lite logs | grep "Initiating Jersey"; do count=$((count+1)); echo "waiting ${count}s"; sleep 1; done; sleep 10
       - name: Test that API delivers some search hits
         run: test $(curl --silent 'http://localhost:64543/api/v1.0/search?q=geht&ql=poliqarp&cq=corpusSigle=DCK' | jq '.matches | length') -gt 10
       - name: Test that UI delivers some search hits
         run: test $(curl --silent 'http://localhost:64543?q=geht&ql=poliqarp&cq=corpusSigle=DCK' | grep -c snippet) -gt 10
       - name: Stop KorAP
-        run: docker-compose stop
+        run: INDEX=./index docker-compose --profile=lite stop
+      - name: Test that super_client_info does not exist
+        run: test !(-f super_client_info)
+      - name: Start KorAP - full
+        run: INDEX=./index docker-compose --profile=full up -d
+      - name: Wait until KorAP is up and running
+        run: count=0; while test $count -lt 25 && ! INDEX=./index docker-compose --profile=full logs | grep "Initiating Jersey"; do count=$((count+1)); echo "waiting ${count}s"; sleep 1; done; sleep 10
+      - name: Test that super_client_info exists
+        run: test -f super_client_info
+      - name: Test that API delivers some search hits
+        run: test $(curl --silent 'http://localhost:64543/api/v1.0/search?q=geht&ql=poliqarp&cq=corpusSigle=DCK' | jq '.matches | length') -gt 10
+      - name: Test that UI delivers some search hits
+        run: test $(curl --silent 'http://localhost:64543?q=geht&ql=poliqarp&cq=corpusSigle=DCK' | grep -c snippet) -gt 10
+      - name: Stop KorAP
+        run: INDEX=./index docker-compose --profile=full stop
 
