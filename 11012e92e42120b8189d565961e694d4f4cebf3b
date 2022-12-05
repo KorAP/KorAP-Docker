@@ -33,6 +33,24 @@
       "message": "Another usual approach to fix order seems to override the cmd/entrypoint and add some sleep conditions before starting services. I am not sure, what the better approach is.",
       "revId": "11012e92e42120b8189d565961e694d4f4cebf3b",
       "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "650991c6_075a7388",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6
+      },
+      "writtenOn": "2022-12-05T08:18:59Z",
+      "side": 1,
+      "message": "Let\u0027s do it in this order:\n\n1. Merge this\n2. Fix https://github.com/KorAP/KorAP-Docker/issues/4\n3. Do further experiments with conditions",
+      "parentUuid": "4ec881ea_3f30a57a",
+      "revId": "11012e92e42120b8189d565961e694d4f4cebf3b",
+      "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
     }
   ]
 }
