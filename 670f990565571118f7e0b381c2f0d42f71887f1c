@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ee41790_418d3994",
+        "filename": "Readme.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 6
+      },
+      "writtenOn": "2022-12-05T16:05:53Z",
+      "side": 1,
+      "message": "/kustvakt/kustvakt.conf \n\n?",
+      "range": {
+        "startLine": 134,
+        "startChar": 41,
+        "endLine": 134,
+        "endChar": 46
+      },
+      "revId": "670f990565571118f7e0b381c2f0d42f71887f1c",
+      "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
+    }
+  ]
+}
