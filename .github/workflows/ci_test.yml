@@ -41,6 +41,31 @@ jobs:
         run: test $(curl --silent 'http://localhost:64543/api/v1.0/search?q=geht&ql=poliqarp&cq=corpusSigle=DCK' | jq '.matches | length') -gt 10
       - name: Test that UI delivers some search hits
         run: test $(curl --silent 'http://localhost:64543?q=geht&ql=poliqarp&cq=corpusSigle=DCK' | grep -c snippet) -gt 10
+
+      - name: Checkout KorAP/KorAP-E2E-Tests
+        uses: actions/checkout@v3.0.2
+        with:
+          repository: KorAP/KorAP-E2E-Tests
+          path: KorAP-E2E-Tests
+      - name: Set up Node.js
+        uses: actions/setup-node@v3.5.1
+        with:
+          cache: npm
+          node-version: latest
+          cache-dependency-path: "./KorAP-E2E-Tests/package-lock.json"
+      - name: Install dependencies of KorAP-E2E-Tests
+        working-directory: ./KorAP-E2E-Tests
+        run: npm install
+      - name: Setup cache for Chromium binary
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/puppeteer/chrome
+          key: ubuntu-latest-chromium-${{ hashFiles('packages/puppeteer-core/src/revisions.ts') }}
+      - name: Install Linux dependencies
+        run: sudo apt-get install xvfb
+      - name: Run end-to-end tests
+        working-directory: ./KorAP-E2E-Tests
+        run: xvfb-run --auto-servernum npm test
+
       - name: Stop KorAP
         run: INDEX=./index docker-compose --profile=full stop
-
