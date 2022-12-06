@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b944be3_7a644913",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6
+      },
+      "writtenOn": "2022-12-06T17:10:57Z",
+      "side": 1,
+      "message": "Works, see: https://github.com/morckx/KorAP-Docker/actions/runs/3631575454/jobs/6126386197#step:18:1",
+      "revId": "2a7c151abfaeab1642069a675f7526743f6b43f9",
+      "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
+    }
+  ]
+}
