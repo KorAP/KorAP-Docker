@@ -16,6 +16,24 @@
       "message": "Pretty cool! I don\u0027t really understand the effect of xvfb and if that affects the error reporting to the GH action, but overall that\u0027s quite impressive and works nice!",
       "revId": "8104dacfe6f2038e17d2f818b7405b5de0bb8054",
       "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f550d8c_a0ce5678",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6
+      },
+      "writtenOn": "2022-12-07T10:42:57Z",
+      "side": 1,
+      "message": "I copied this from the puppeteer CI workflow itself, so that I simply believed that xvfb is necessary in the Linux case. Concerning error reporting I\u0027m pretty sure that it\u0027s passed through.",
+      "parentUuid": "499f18cd_37000934",
+      "revId": "8104dacfe6f2038e17d2f818b7405b5de0bb8054",
+      "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
     }
   ]
 }
