@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c8d5626_45972699",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19
+      },
+      "writtenOn": "2023-02-06T08:52:19Z",
+      "side": 1,
+      "message": "At least as a test. I don\u0027t know why the docker stops so often. instance/test has Kalamar dockerized for a while now without any necessary restarts to the best of my knowledge.",
+      "revId": "0268a9f20d03c52f1fe992a32820243960243b2c",
+      "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
+    }
+  ]
+}
