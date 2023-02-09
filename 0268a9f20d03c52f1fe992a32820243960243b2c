@@ -16,6 +16,24 @@
       "message": "At least as a test. I don\u0027t know why the docker stops so often. instance/test has Kalamar dockerized for a while now without any necessary restarts to the best of my knowledge.",
       "revId": "0268a9f20d03c52f1fe992a32820243960243b2c",
       "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4064d164_15a25edc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6
+      },
+      "writtenOn": "2023-02-09T08:32:36Z",
+      "side": 1,
+      "message": "Testing it now with https://korap.ids-mannheim.de/instance/icc , too.",
+      "parentUuid": "7c8d5626_45972699",
+      "revId": "0268a9f20d03c52f1fe992a32820243960243b2c",
+      "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
     }
   ]
 }
