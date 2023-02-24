@@ -39,6 +39,9 @@ initialize and start the service with
 
 ```shell
 $ INDEX=./index docker-compose --profile=init up
+```
+
+```shell
 $ INDEX=./index docker-compose --profile=full up
 ```
 
@@ -101,6 +104,9 @@ JSON files, the following command ...
 
 ```shell
 $ mkdir json
+```
+
+```shell
 $ docker run --rm -u root \
   -v ${PWD}:/kalamar/data:z korap/kalamar:latest-conv\
   korapxml2krill archive \
@@ -130,6 +136,9 @@ be used to index the JSON files:
 
 ```shell
 $ mkdir index
+```
+
+```shell
 $ docker run -u root --rm -v ${PWD}:/data:z korap/kustvakt \
   Krill-Indexer.jar -c /kustvakt/kustvakt-lite.conf \
   -i /data/json -o /data/index/
