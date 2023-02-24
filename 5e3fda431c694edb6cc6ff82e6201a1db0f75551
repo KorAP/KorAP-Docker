@@ -16,6 +16,24 @@
       "message": "Rameela also suggested to remove the dollar prefix, but I think it\u0027s a reasonable hint that this is a command line.",
       "revId": "5e3fda431c694edb6cc6ff82e6201a1db0f75551",
       "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df139576_9aedf66a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6
+      },
+      "writtenOn": "2023-02-24T12:43:44Z",
+      "side": 1,
+      "message": "Yes, I drop the $ whenever the distinction is clear",
+      "parentUuid": "2d1807d0_a0bbb8a3",
+      "revId": "5e3fda431c694edb6cc6ff82e6201a1db0f75551",
+      "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
     }
   ]
 }
