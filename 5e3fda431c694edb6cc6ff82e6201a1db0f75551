@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d1807d0_a0bbb8a3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19
+      },
+      "writtenOn": "2023-02-24T12:23:21Z",
+      "side": 1,
+      "message": "Rameela also suggested to remove the dollar prefix, but I think it\u0027s a reasonable hint that this is a command line.",
+      "revId": "5e3fda431c694edb6cc6ff82e6201a1db0f75551",
+      "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
+    }
+  ]
+}
