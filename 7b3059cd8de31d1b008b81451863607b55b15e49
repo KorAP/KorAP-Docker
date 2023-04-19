@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b59cefdf_9e13fd08",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19
+      },
+      "writtenOn": "2023-04-19T16:54:14Z",
+      "side": 1,
+      "message": "This ensures that the KorAP compose docker can live in peace with other compose projects.",
+      "revId": "7b3059cd8de31d1b008b81451863607b55b15e49",
+      "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
+    }
+  ]
+}
