@@ -60,8 +60,8 @@ services:
     volumes:
       - "${INDEX}:/kustvakt/index:z"
       - type: bind
-        source: "${PWD}/super_client_info"
-        target: /kustvakt/client/super_client_info
+        source: "${PWD}/"
+        target: /kustvakt/data/
     profiles:
       - full
     depends_on:
