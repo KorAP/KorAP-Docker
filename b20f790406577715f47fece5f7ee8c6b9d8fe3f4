@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c58a28b_98a585cb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19
+      },
+      "writtenOn": "2023-10-24T13:26:13Z",
+      "side": 1,
+      "message": "This allows to start an example KorAP instance with a mounted example index using\n\nINDEX\u003d\u0027example-index\u0027 docker-compose -p korap --profile\u003dexample up\n\nThis requires the Kustvakt example index to be available.",
+      "revId": "b20f790406577715f47fece5f7ee8c6b9d8fe3f4",
+      "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
+    }
+  ]
+}
