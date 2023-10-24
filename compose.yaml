@@ -1,5 +1,14 @@
 version: '3.8'
+volumes:
+  example-index:
 services:
+  examplecontainer:
+    image: "korap/example-index:latest"
+    profiles:
+      - example
+    volumes:
+      - "example-index:/kustvakt/index"
+    restart: "no"
   kalamar:
     image: "korap/kalamar:latest-conv"
     ports:
@@ -10,6 +19,7 @@ services:
       - kustvakt
     profiles:
       - lite
+      - example
     restart: "unless-stopped"
   full-init:
     image: "korap/kalamar:latest-conv"
@@ -52,6 +62,7 @@ services:
       - "${INDEX}:/kustvakt/index:z"
     profiles:
       - lite
+      - example
     restart: "unless-stopped"
   kustvakt-full:
     image: "korap/kustvakt:latest-full"
