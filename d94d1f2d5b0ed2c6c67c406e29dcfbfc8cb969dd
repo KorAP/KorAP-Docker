@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b703640f_c1ca7fc2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19
+      },
+      "writtenOn": "2023-10-25T07:20:16Z",
+      "side": 1,
+      "message": "I just changed the profile structure, so profiles are a bit more flexible now and the example index can be used for full as well. To start the example with lite it\u0027s now either\n\nINDEX\u003d\u0027example-index\u0027 docker-compose -p korap --profile\u003dlite --profile\u003dexample up\n\nor\n\nCOMPOSE_PROFILES\u003dlite,example INDEX\u003d\u0027example-index\u0027 docker-compose -p korap up\n\nThat way it\u0027s also easier to compose the export or the external resources plugin.",
+      "revId": "d94d1f2d5b0ed2c6c67c406e29dcfbfc8cb969dd",
+      "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
+    }
+  ]
+}
