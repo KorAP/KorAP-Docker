@@ -50,6 +50,23 @@
       "message": "Yes, podman forbids that. Anyway, login does not seem to work even with this patch",
       "revId": "d74a5d22a7301cd112aa875fc4f509d2ed94b1bb",
       "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "acd2388c_74b1779e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19
+      },
+      "writtenOn": "2023-11-22T12:50:58Z",
+      "side": 1,
+      "message": "This is not a patch for login - but for the Kalamar superclient credentials. Login is unrelated to docker compose.\n\nWe should probably copy parts of the ICC compose solution with the data folder. It looks weird, but is probably the most flexible solution.",
+      "revId": "d74a5d22a7301cd112aa875fc4f509d2ed94b1bb",
+      "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
     }
   ]
 }
