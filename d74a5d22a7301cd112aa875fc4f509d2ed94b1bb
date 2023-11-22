@@ -16,6 +16,23 @@
       "message": "The problem with the client credentials is probably solved by this change to the docker compose. But it was never tested. Eliza made this change and it wasn\u0027t reflected in the compose file yet: https://github.com/KorAP/Kustvakt/commit/c9d29415812fd3f293d31e8722beeb162368e50d\n\nSorry - I forgot to ask for review.",
       "revId": "d74a5d22a7301cd112aa875fc4f509d2ed94b1bb",
       "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8eb1376_a403bba9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19
+      },
+      "writtenOn": "2023-11-22T12:03:56Z",
+      "side": 1,
+      "message": "Okay - the problem still is that this can\u0027t be done in the current working directory, because Kustvakt then would be able to write the sqlite database in the host working directory. I guess we\u0027ll have to think about that.",
+      "revId": "d74a5d22a7301cd112aa875fc4f509d2ed94b1bb",
+      "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
     }
   ]
 }
