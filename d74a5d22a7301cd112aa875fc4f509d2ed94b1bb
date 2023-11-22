@@ -33,6 +33,23 @@
       "message": "Okay - the problem still is that this can\u0027t be done in the current working directory, because Kustvakt then would be able to write the sqlite database in the host working directory. I guess we\u0027ll have to think about that.",
       "revId": "d74a5d22a7301cd112aa875fc4f509d2ed94b1bb",
       "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32c354a0_3c3e2511",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6
+      },
+      "writtenOn": "2023-11-22T12:25:56Z",
+      "side": 1,
+      "message": "Yes, podman forbids that. Anyway, login does not seem to work even with this patch",
+      "revId": "d74a5d22a7301cd112aa875fc4f509d2ed94b1bb",
+      "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
     }
   ]
 }
