@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eaffe92e_c62c29f8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19
+      },
+      "writtenOn": "2023-11-22T11:43:25Z",
+      "side": 1,
+      "message": "The problem with the client credentials is probably solved by this change to the docker compose. But it was never tested. Eliza made this change and it wasn\u0027t reflected in the compose file yet: https://github.com/KorAP/Kustvakt/commit/c9d29415812fd3f293d31e8722beeb162368e50d\n\nSorry - I forgot to ask for review.",
+      "revId": "d74a5d22a7301cd112aa875fc4f509d2ed94b1bb",
+      "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
+    }
+  ]
+}
