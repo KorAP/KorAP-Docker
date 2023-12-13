@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b677327_65cc7b92",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19
+      },
+      "writtenOn": "2023-12-13T12:30:15Z",
+      "side": 1,
+      "message": "This should fix the problems mentioned in https://korap.ids-mannheim.de/gerrit/c/KorAP/KorAP-Docker/+/7052\n\nIt\u0027s based on the ICC docker recipe.",
+      "revId": "035ec442eef7c55076ec45ba753eceac925ce7fe",
+      "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
+    }
+  ]
+}
