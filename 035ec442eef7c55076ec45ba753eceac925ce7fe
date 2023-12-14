@@ -33,6 +33,23 @@
       "message": "Should also fix https://github.com/KorAP/KorAP-Docker/issues/7",
       "revId": "035ec442eef7c55076ec45ba753eceac925ce7fe",
       "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b557b487_2f8c50d2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 63
+      },
+      "writtenOn": "2023-12-14T08:29:36Z",
+      "side": 1,
+      "message": "Looks good to me",
+      "revId": "035ec442eef7c55076ec45ba753eceac925ce7fe",
+      "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
     }
   ]
 }
