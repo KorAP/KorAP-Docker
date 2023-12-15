@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10cab57b_6d23a51a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19
+      },
+      "writtenOn": "2023-12-15T15:37:11Z",
+      "side": 1,
+      "message": "Has to wait for docker hub.",
+      "revId": "48407a4d1a279947914f5b2db8e8b267de24097d",
+      "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
+    }
+  ]
+}
