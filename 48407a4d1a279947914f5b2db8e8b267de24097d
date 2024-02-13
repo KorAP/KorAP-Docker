@@ -33,6 +33,23 @@
       "message": "What\u0027s the docker hub state?",
       "revId": "48407a4d1a279947914f5b2db8e8b267de24097d",
       "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e221fb90_e24f9999",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19
+      },
+      "writtenOn": "2024-02-13T16:42:58Z",
+      "side": 1,
+      "message": "Waiting for review: https://korap.ids-mannheim.de/gerrit/c/KorAP/Kustvakt/+/8018",
+      "revId": "48407a4d1a279947914f5b2db8e8b267de24097d",
+      "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
     }
   ]
 }
