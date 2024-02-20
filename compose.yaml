@@ -73,7 +73,7 @@ services:
       - "${INDEX}:/kustvakt/index:z"
       - type: bind
         source: "${PWD}/data/"
-        target: /kustvakt/data/
+        target: "/kustvakt/data/"
     profiles:
       - full
     depends_on:
