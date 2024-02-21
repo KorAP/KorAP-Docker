@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3691acd4_f5a75819",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6
+      },
+      "writtenOn": "2024-02-21T20:00:20Z",
+      "side": 1,
+      "message": "fixes the full setup and the CI workflow, see https://github.com/morckx/KorAP-Docker/actions/runs/7994735086/job/21833462115",
+      "revId": "1cfedf5d5600a660c52e12aa22269d356e1703d6",
+      "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
+    }
+  ]
+}
