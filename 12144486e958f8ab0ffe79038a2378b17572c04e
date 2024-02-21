@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4bca9543_4d4c3979",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6
+      },
+      "writtenOn": "2024-02-21T12:30:38Z",
+      "side": 1,
+      "message": "Let\u0027s first fix the full init",
+      "revId": "12144486e958f8ab0ffe79038a2378b17572c04e",
+      "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
+    }
+  ]
+}
