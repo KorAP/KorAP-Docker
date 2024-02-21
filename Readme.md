@@ -49,16 +49,7 @@ This will make the frontend be available at
 To use your own index, please follow the instructions
 on [Corpus Conversion](#corpus-conversion) first.
 
-To run the service with an additional user management system,
-initialize with
-
-```shell
-$ INDEX=./index docker-compose -p korap --profile=init up
-```
-The init step creates a file called `super_client_info` in the
-current directory that acts as a shared secret between the frontend and the backend.
-To enable this in Kalamar, the configuration file `kalamar.production.conf`
-needs to point to the mounted file, so it requires a configuration along the lines of
+To run the service with a user management system, create a file `$(pwd)/data/kalamar.production.conf` containing the following configuration:
 
 ```perl
 {
@@ -71,12 +62,14 @@ needs to point to the mounted file, so it requires a configuration along the lin
 }
 ```
 
-Then the service can be started with
+
+Then start the service with
 
 ```shell
 $ INDEX=./index docker-compose -p korap --profile=full up
 ```
 
+Login with `user1` and `password1`. To change authentication settings, see the `/kusvakt/ldap` folder inside the docker container and Kustvakt's [LDAP Settings Wiki](https://github.com/KorAP/Kustvakt/wiki/LDAP-Setting) for documentation.
 
 ## Corpus Conversion
 
