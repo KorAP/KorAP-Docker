@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3322513_61315c7a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19
+      },
+      "writtenOn": "2024-02-22T11:30:40Z",
+      "side": 1,
+      "message": "Because KorAP should be started using lite or full profiles, it\u0027s confusing to start anything on \u0027example\u0027 other than the index.",
+      "revId": "70d7b58a27fc0283ad8ce1ce4d8be3e813849306",
+      "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
+    }
+  ]
+}
