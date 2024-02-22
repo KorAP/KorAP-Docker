@@ -16,6 +16,24 @@
       "message": "It seems that it\u0027s not possible to unresolve issues, when they are marked as resolved. The init step may not be that problematic now that we work in an existing data folder, but we had several complaints that it didn\u0027t work in certain environments and I would suggest to ad least include the init step in case the credentials are not created on full up, or made more tests - not limited to GH CI.",
       "revId": "64df33f70a9fa2a4a95e5c8b2c94be6a528daf82",
       "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d26c2676_be0901d2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6
+      },
+      "writtenOn": "2024-02-22T09:56:04Z",
+      "side": 1,
+      "message": "docker-compose is a moving target. We could also add gitlab pipelines to test it on all possible systems, at least ubuntu-latest, debian testing, fedora, arch, ...",
+      "parentUuid": "d49d33a0_eb194184",
+      "revId": "64df33f70a9fa2a4a95e5c8b2c94be6a528daf82",
+      "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
     }
   ],
   "submitRequirementResults": []
