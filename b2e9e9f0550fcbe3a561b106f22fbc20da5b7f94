@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "33b798ae_9f0dc756",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19
+      },
+      "writtenOn": "2024-02-22T11:28:51Z",
+      "side": 1,
+      "message": "Actually - I made a mistake. Kalamar shouldn\u0027t be started with \"example\". It doesn\u0027t hurt, but it gives the impression, that this works. But actually it only starts the example image and the frontend - not the backend. I am not sure, why it works then - maybe a backend service is still available? Maybe some services did not stop properly?",
+      "revId": "b2e9e9f0550fcbe3a561b106f22fbc20da5b7f94",
+      "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
+    }
+  ]
+}
