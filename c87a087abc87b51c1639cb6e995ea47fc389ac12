@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5345cabe_6ec53816",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19
+      },
+      "writtenOn": "2024-02-22T07:39:42Z",
+      "side": 1,
+      "message": "Are we sure this now works with all docker compose setups? It always worked for me without init, but we had to add the init step for some environments.",
+      "revId": "c87a087abc87b51c1639cb6e995ea47fc389ac12",
+      "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
+    }
+  ]
+}
