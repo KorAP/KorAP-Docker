@@ -63,6 +63,7 @@ services:
       - "${INDEX}:/kustvakt/index:z"
     profiles:
       - lite
+      - example
     restart: "unless-stopped"
   kustvakt-full:
     image: "korap/kustvakt:latest-full"
