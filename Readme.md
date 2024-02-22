@@ -22,14 +22,13 @@ respective repositories.
 Install [docker](https://www.docker.com/) and
 [docker compose](https://github.com/docker/compose) (>= v2).
 
-
 ## Starting
 
 To get KorAP running, an index is required.
 For testing, there is a test index available as a docker image. Just run
 
-```
-$ INDEX='example-index' docker-compose -p korap --profile=lite --profile=example up
+```shell
+INDEX='example-index' docker-compose -p korap --profile=lite --profile=example up
 ```
 
 to start the example image.
@@ -40,7 +39,7 @@ To download, intialize and run KorAP pointing to that index folder
 run
 
 ```shell
-$ INDEX=./index docker-compose -p korap --profile=lite up
+INDEX=./index docker-compose -p korap --profile=lite up
 ```
 
 This will make the frontend be available at
@@ -66,7 +65,7 @@ To run the service with a user management system, create a file `$(pwd)/data/kal
 Then start the service with
 
 ```shell
-$ INDEX=./index docker-compose -p korap --profile=full up
+INDEX=./index docker-compose -p korap --profile=full up
 ```
 
 Login with `user1` and `password1`. To change authentication settings, see the `/kusvakt/ldap` folder inside the docker container and Kustvakt's [LDAP Settings Wiki](https://github.com/KorAP/Kustvakt/wiki/LDAP-Setting) for documentation.
@@ -90,7 +89,7 @@ The file is located at `example/dck-part1.i5.xml`.
 The command ...
 
 ```shell
-$ docker run --rm \
+docker run --rm \
   -v ${PWD}/example:/data:z korap/kalamar:latest-conv \
   tei2korapxml \
   --inline-tokens '!cmc#morpho' \
@@ -112,11 +111,11 @@ into individual [Krill](https://github.com/KorAP/Krill) compatible
 JSON files, the following command ...
 
 ```shell
-$ mkdir json
+mkdir json
 ```
 
 ```shell
-$ docker run --rm -u root \
+docker run --rm -u root \
   -v ${PWD}:/kalamar/data:z korap/kalamar:latest-conv\
   korapxml2krill archive \
   -z \
@@ -144,11 +143,11 @@ used for default annotation of sentence and paragraph boundaries.
 be used to index the JSON files:
 
 ```shell
-$ mkdir index
+mkdir index
 ```
 
 ```shell
-$ docker run -u root --rm -v ${PWD}:/data:z korap/kustvakt \
+docker run -u root --rm -v ${PWD}:/data:z korap/kustvakt \
   Krill-Indexer.jar -c /kustvakt/kustvakt-lite.conf \
   -i /data/json -o /data/index/
 ```
