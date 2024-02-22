@@ -158,6 +158,24 @@
       "parentUuid": "75efadfd_291cfa75",
       "revId": "1cfedf5d5600a660c52e12aa22269d356e1703d6",
       "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27253c05_dbfd4345",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19
+      },
+      "writtenOn": "2024-02-22T09:48:47Z",
+      "side": 1,
+      "message": "Ah - or I wanted to mark it as resolved, but it was resolved on merge.",
+      "parentUuid": "b35bb1f6_03b4a3b3",
+      "revId": "1cfedf5d5600a660c52e12aa22269d356e1703d6",
+      "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
     }
   ]
 }
