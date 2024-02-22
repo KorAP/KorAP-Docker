@@ -71,3 +71,18 @@ jobs:
 
       - name: Stop KorAP
         run: docker-compose -p korap --profile=full stop
+
+      - name: Start KorAP with example index
+        run: INDEX='example-index' docker-compose -p korap --profile=lite --profile=example up -d
+      - name: Wait until KorAP with example index is up and running
+        run: count=0; while test $count -lt 25 && ! docker-compose -p korap logs | grep "Web application available at"; do count=$((count+1)); echo "waiting ${count}s"; sleep 1; done; sleep 10
+      - name: Test that API delivers some search hits on example index
+        run: test $(curl --silent 'http://localhost:64543/api/v1.0/search?q=%5Btt%2Fl%3Dgut+%26+tt%2Fp%3DADJD%5D&ql=poliqarp' | jq '.matches | length') -gt 10
+      - name: Test that UI delivers some search hits on example index
+        run: test $(curl --silent 'http://localhost:64543?q=%5Btt%2Fl%3Dgut+%26+tt%2Fp%3DADJD%5D&ql=poliqarp' | grep -c snippet) -gt 10
+      - name: Run end-to-end tests on example index
+        working-directory: ./KorAP-E2E-Tests
+        env:
+          KORAP_LOGIN: ""
+          KORAP_QUERIES: "[corenlp/p=VAFIN][]{2}[marmot/m=number:sg][opennlp/p=PPER][tt/l=er][tt/p=ADV]"
+        run: xvfb-run --auto-servernum npm test
