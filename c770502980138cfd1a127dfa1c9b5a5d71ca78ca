@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eaa31014_92d2c05b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6
+      },
+      "writtenOn": "2024-02-22T10:10:38Z",
+      "side": 1,
+      "message": "Does not work with GH action\u0027s docker compose:\n\nhttps://github.com/morckx/KorAP-Docker/actions/runs/8002619092/job/21856227930#step:25:1",
+      "revId": "c770502980138cfd1a127dfa1c9b5a5d71ca78ca",
+      "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
+    }
+  ]
+}
