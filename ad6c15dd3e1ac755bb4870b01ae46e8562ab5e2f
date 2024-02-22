@@ -34,6 +34,23 @@
       "parentUuid": "9fd5db5e_f5f6ba45",
       "revId": "ad6c15dd3e1ac755bb4870b01ae46e8562ab5e2f",
       "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "72a3ccfd_272a5902",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6
+      },
+      "writtenOn": "2024-02-22T12:01:04Z",
+      "side": 1,
+      "message": "At least, the workflow now works:\nhttps://github.com/morckx/KorAP-Docker/actions/runs/8003847140/job/21859993433\nBut only because of:\nhttps://korap.ids-mannheim.de/gerrit/c/KorAP/KorAP-Docker/+/8179",
+      "revId": "ad6c15dd3e1ac755bb4870b01ae46e8562ab5e2f",
+      "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
     }
   ]
 }
