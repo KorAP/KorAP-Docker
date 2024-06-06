@@ -45,7 +45,7 @@ INDEX=./index docker-compose -p korap --profile=lite up
 ```
 
 This will make the frontend be available at
-`localhost:64543`.
+`localhost:48887`.
 
 To use your own index, please follow the instructions
 on [Corpus Conversion](#corpus-conversion) first.
