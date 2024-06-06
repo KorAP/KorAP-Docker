@@ -95,6 +95,7 @@ docker run --rm \
   -v ${PWD}/example:/data:z korap/kalamar:latest-conv \
   tei2korapxml \
   --inline-tokens '!cmc#morpho' \
+  --no-tokenizer \
   --input /data/dck-part1.i5.xml > dck.zip
 ```
 
