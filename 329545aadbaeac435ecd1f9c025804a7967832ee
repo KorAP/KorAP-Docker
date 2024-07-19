@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "674fb32a_e02d9c99",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19
+      },
+      "writtenOn": "2024-07-19T09:45:55Z",
+      "side": 1,
+      "message": "I can\u0027t really test atm because the full service fails. However - there should be a way to run this with lite, of course.",
+      "revId": "329545aadbaeac435ecd1f9c025804a7967832ee",
+      "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
+    }
+  ]
+}
