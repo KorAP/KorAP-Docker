@@ -45,6 +45,9 @@ services:
       - type: bind
         source: "${PWD}/data/super_client_info"
         target: /kalamar/super_client_info
+      - type: bind
+        source: "${PWD}/data/"
+        target: /kalamar/data/
     depends_on:
       kustvakt-full:
         condition: service_started
@@ -78,6 +81,20 @@ services:
     depends_on:
       full-init:
         condition: service_completed_successfully
+    restart: "unless-stopped"
+  kalamar-plugin-export:
+    image: "korap/kalamar-plugin-export:0.3.0"
+    ports:
+      - "7777:7777"
+    volumes:
+      - type: bind
+        source: "${PWD}/data/exportPlugin.conf"
+        target: "/export/exportPlugin.conf"
+      - type: bind
+        source: "${PWD}/data/files"
+        target: "/export/data/files"
+    profiles:
+      - export
     restart: "unless-stopped"
 configs:
   super_client_info:
