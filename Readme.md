@@ -58,6 +58,67 @@ INDEX=./index docker compose -p korap --profile=full up
 
 Login with `user1` and `password1`. To change authentication settings, see the `/kusvakt/ldap` folder inside the docker container and Kustvakt's [LDAP Settings Wiki](https://github.com/KorAP/Kustvakt/wiki/LDAP-Setting) for documentation.
 
+### Profile `--export`
+
+The `export` profile only works in conjunction with the `full` profile.
+
+To start the export plugin, add an empty directory `data/files`.
+This directory will be mounted as a cache for generated exports.
+
+It's also necessary to add a configuration file `exportPlugin.conf`
+to the `data` folder with at least the following lines:
+
+```
+# Server Configuration
+server.port=7777
+server.host=localhost
+server.scheme=http
+
+# API Configuration
+api.port=64543
+api.host=localhost
+api.scheme=http
+
+# The file directory to serve from
+conf.file_dir=/export/data/files/
+```
+
+To add the frontend-plugin to Kalamar you need to add a Javascript file
+`embed.plugins.json` to the data folder containing
+
+```json
+[{
+  "name" : "Export",
+  "desc" : "Exports Kalamar results",
+  "embed" : [{
+    "panel" : "result",
+    "title" : "exports KWICs and snippets",
+    "icon" : "\uf019",
+    "classes" : ["button-icon", "plugin" ],
+    "onClick" : {
+      "action" : "addWidget",
+      "template" : "http://localhost:7777/export",
+      "permissions":["forms","scripts","downloads"]
+    }
+  }]
+}]
+```
+
+and mount it as part of the Kalamar configuration `kalamar.production.conf` with the lines:
+
+```perl
+{
+  'Kalamar-Plugins' => {
+    default_plugins => '/kalamar/data/embed.plugins.json'
+  }
+}
+```
+
+Afterwords the command add-on `--profile export` will integrate the
+[export plugin](https://github.com/KorAP/Kalamar-Plugin-Export) into KorAP.
+
+*Caution: This integration flow is preliminary and will likely be simplified in the future.*
+
 ## Corpus Conversion
 
 In order to create an index based on existing
