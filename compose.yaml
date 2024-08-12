@@ -10,7 +10,7 @@ services:
       - "example-index:/kustvakt/index"
     restart: "no"
   kalamar:
-    image: "korap/kalamar:latest-conv"
+    image: "korap/kalamar:latest"
     ports:
       - "64543:64543"
     environment:
@@ -21,7 +21,7 @@ services:
       - lite
     restart: "unless-stopped"
   full-init:
-    image: "korap/kalamar:latest-conv"
+    image: "korap/kalamar:latest"
     command: super_client_info kalamar /kalamar/data/super_client_info
     volumes:
       - type: bind
@@ -33,11 +33,12 @@ services:
     user: root
     restart: "no"
   kalamar-full:
-    image: "korap/kalamar:latest-conv"
+    image: "korap/kalamar:latest"
     ports:
       - "64543:64543"
     environment:
       KALAMAR_API: "http://kustvakt-full:8089/api/"
+      KALAMAR_PLUGINS: "KorAPXML2Krill,Tei2KorAPXML,KorAPXML2CoNLLU,Auth"
     volumes:
       - type: bind
         source: "${PWD}/data/kalamar.production.conf"
