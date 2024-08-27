@@ -78,7 +78,7 @@ The command ...
 
 ```shell
 docker run --rm \
-  -v ${PWD}/example:/data:z korap/kalamar:latest-conv \
+  -v ${PWD}/example:/data:z korap/kalamar:latest \
   tei2korapxml \
   --inline-tokens '!cmc#morpho' \
   --no-tokenizer \
@@ -105,7 +105,7 @@ mkdir json
 
 ```shell
 docker run --rm -u root \
-  -v ${PWD}:/kalamar/data:z korap/kalamar:latest-conv\
+  -v ${PWD}:/kalamar/data:z korap/kalamar:latest\
   korapxml2krill archive \
   -z \
   -i /kalamar/data/dck.zip \
