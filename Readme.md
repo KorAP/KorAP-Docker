@@ -50,21 +50,7 @@ This will make the frontend be available at
 To use your own index, please follow the instructions
 on [Corpus Conversion](#corpus-conversion) first.
 
-To run the service with a user management system, create a file `$(pwd)/data/kalamar.production.conf` containing the following configuration:
-
-```perl
-{
-    Kalamar => {
-        plugins  => ['Auth']
-    },
-    'Kalamar-Auth' => {
-        client_file => '/kalamar/super_client_info'
-    }
-}
-```
-
-
-Then start the service with
+To run the service with a user management system, start the service with
 
 ```shell
 INDEX=./index docker-compose -p korap --profile=full up
