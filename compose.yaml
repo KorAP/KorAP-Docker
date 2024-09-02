@@ -38,13 +38,15 @@ services:
       - "64543:64543"
     environment:
       KALAMAR_API: "http://kustvakt-full:8089/api/"
+      KALAMAR_PLUGINS: "Auth"
+      KALAMAR_CLIENT_FILE: "/kalamar/super_client_info"
     volumes:
       - type: bind
         source: "${PWD}/data/kalamar.production.conf"
         target: "/kalamar/kalamar.production.conf"
       - type: bind
         source: "${PWD}/data/super_client_info"
-        target: /kalamar/super_client_info
+        target: "/kalamar/super_client_info"
     depends_on:
       kustvakt-full:
         condition: service_started
