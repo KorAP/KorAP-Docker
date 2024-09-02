@@ -16,6 +16,23 @@
       "message": "This removes the requirement of a configuration file in full. As always: Docker compose is just a default recipe, and don\u0027t need to be compatible with anything out there in the wild. This is meant to be a basic recipe, and I think it should be as simple as possible.",
       "revId": "16508ef17071693c43685f18c6677054c91251dc",
       "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "37cdc96d_43589379",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6
+      },
+      "writtenOn": "2024-09-02T11:28:09Z",
+      "side": 1,
+      "message": "To my surprise, this does not work with 27.2.0:\n\n```\n$ INDEX\u003d./index docker compose -p korap -v --profile\u003dfull up\nWARN[0000] The \"KALAMAR_CLIENT_FILE\" variable is not set. Defaulting to a blank string. \nWARN[0000] /home/kupietz/KorAP/KorAP-Docker/compose.yaml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion \n[+] Running 2/0\n ✔ Container korap-full-init-1      Created                                                                                                                                              0.0s \n ✔ Container korap-kustvakt-full-1  Created                                                                                                                                              0.0s \n ⠋ Container korap-kalamar-full-1   Recreate                                                                                                                                             0.0s \nError response from daemon: invalid mount config for type \"bind\": invalid mount path: \u0027.\u0027 mount path must be absolute\n```",
+      "revId": "16508ef17071693c43685f18c6677054c91251dc",
+      "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
     }
   ]
 }
