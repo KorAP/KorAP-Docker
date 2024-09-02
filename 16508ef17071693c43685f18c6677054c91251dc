@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e90f8c4f_c4dd9c64",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19
+      },
+      "writtenOn": "2024-09-02T10:39:32Z",
+      "side": 1,
+      "message": "This removes the requirement of a configuration file in full. As always: Docker compose is just a default recipe, and don\u0027t need to be compatible with anything out there in the wild. This is meant to be a basic recipe, and I think it should be as simple as possible.",
+      "revId": "16508ef17071693c43685f18c6677054c91251dc",
+      "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
+    }
+  ]
+}
