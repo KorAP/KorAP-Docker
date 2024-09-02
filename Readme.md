@@ -28,7 +28,7 @@ To get KorAP running, an index is required.
 For testing, there is a test index available as a docker image. Just run
 
 ```shell
-INDEX='example-index' docker-compose -p korap --profile=lite --profile=example up
+INDEX='example-index' docker compose -p korap --profile=lite --profile=example up
 ```
 
 to start the example image and the service with Linux
@@ -41,7 +41,7 @@ To download, intialize and run KorAP pointing to that index folder
 run
 
 ```shell
-INDEX=./index docker-compose -p korap --profile=lite up
+INDEX=./index docker compose -p korap --profile=lite up
 ```
 
 This will make the frontend be available at
@@ -53,7 +53,7 @@ on [Corpus Conversion](#corpus-conversion) first.
 To run the service with a user management system, start the service with
 
 ```shell
-INDEX=./index docker-compose -p korap --profile=full up
+INDEX=./index docker compose -p korap --profile=full up
 ```
 
 Login with `user1` and `password1`. To change authentication settings, see the `/kusvakt/ldap` folder inside the docker container and Kustvakt's [LDAP Settings Wiki](https://github.com/KorAP/Kustvakt/wiki/LDAP-Setting) for documentation.
@@ -151,7 +151,7 @@ In addition the `PWD` variable is not set beforehand. To run, e.g., the KorAP on
 with Windows, you have to start
 
 ```powershell
-$env:INDEX='example-index'; $env:PWD='.'; docker-compose -p korap --profile=lite --profile=example up
+$env:INDEX='example-index'; $env:PWD='.'; docker compose -p korap --profile=lite --profile=example up
 
 ```
 
