@@ -33,6 +33,23 @@
       "message": "It shouldn\u0027t require a conf file anymore.",
       "revId": "87f99a5c07f0b5fc55262c37ab1295c0790ac1fd",
       "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "04e5bad2_4077f771",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6
+      },
+      "writtenOn": "2024-09-02T15:42:52Z",
+      "side": 1,
+      "message": "Right",
+      "revId": "87f99a5c07f0b5fc55262c37ab1295c0790ac1fd",
+      "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
     }
   ]
 }
