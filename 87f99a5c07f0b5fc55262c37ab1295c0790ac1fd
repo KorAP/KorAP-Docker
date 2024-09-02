@@ -16,6 +16,23 @@
       "message": "I don\u0027t know, if it still makes sense, but it works now 😊",
       "revId": "87f99a5c07f0b5fc55262c37ab1295c0790ac1fd",
       "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b795ddc1_ed66da7b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19
+      },
+      "writtenOn": "2024-09-02T15:41:02Z",
+      "side": 1,
+      "message": "It shouldn\u0027t require a conf file anymore.",
+      "revId": "87f99a5c07f0b5fc55262c37ab1295c0790ac1fd",
+      "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
     }
   ]
 }
