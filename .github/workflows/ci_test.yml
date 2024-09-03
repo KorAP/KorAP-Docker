@@ -29,10 +29,6 @@ jobs:
         run: INDEX=./index docker compose -p korap --profile=lite stop
       - name: Test that super_client_info does not exist
         run: test ! -f super_client_info
-      - name: Create kalamar.production.conf
-        run:  |
-          mkdir -p data
-          echo "{Kalamar=>{plugins=>['Auth']},'Kalamar-Auth'=>{client_file=>'/kalamar/super_client_info'}}" > data/kalamar.production.conf
       - name: Start KorAP - full
         run: INDEX=./index docker compose -p korap --profile=full up -d
       - name: Wait until KorAP is up and running
