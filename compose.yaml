@@ -1,4 +1,3 @@
-version: '3.9'
 volumes:
   example-index:
 services:
@@ -41,9 +40,6 @@ services:
       KALAMAR_PLUGINS: "Auth"
       KALAMAR_CLIENT_FILE: "/kalamar/super_client_info"
     volumes:
-      - type: bind
-        source: "${PWD}/data/kalamar.production.conf"
-        target: "/kalamar/kalamar.production.conf"
       - type: bind
         source: "${PWD}/data/super_client_info"
         target: "/kalamar/super_client_info"
