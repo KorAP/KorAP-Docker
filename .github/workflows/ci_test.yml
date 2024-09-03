@@ -8,25 +8,25 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Convert TEI input to KorAP-XML
-        run:  docker run --rm -v ${PWD}/example:/data korap/kalamar:latest-conv tei2korapxml --no-tokenizer --inline-tokens '!cmc#morpho' --input /data/dck-part1.i5.xml > dck.zip
+        run:  docker run --rm -v ${PWD}/example:/data korap/kalamar:latest tei2korapxml --no-tokenizer --inline-tokens '!cmc#morpho' --input /data/dck-part1.i5.xml > dck.zip
       - name: Convert KorAP-XML to Krill
         run: |
           mkdir json
-          docker run --rm -u root -v ${PWD}:/kalamar/data:z korap/kalamar:latest-conv korapxml2krill archive -z -i /kalamar/data/dck.zip --jobs -1 --token 'cmc#morpho' --base-paragraphs 'DeReKo#Structure' --base-sentences 'DeReKo#Structure'   -o ./data/json/
+          docker run --rm -u root -v ${PWD}:/kalamar/data:z korap/kalamar:latest korapxml2krill archive -z -i /kalamar/data/dck.zip --jobs -1 --token 'cmc#morpho' --base-paragraphs 'DeReKo#Structure' --base-sentences 'DeReKo#Structure'   -o ./data/json/
       - name: Build index
         run: |
           mkdir index
           INDEX=./index docker run -u root --rm -v ${PWD}:/data:z korap/kustvakt Krill-Indexer.jar -c /kustvakt/kustvakt-lite.conf -i /data/json -o /data/index/
       - name: Start KorAP - lite
-        run: INDEX=./index docker-compose -p korap --profile=lite up -d
+        run: INDEX=./index docker compose -p korap --profile=lite up -d
       - name: Wait until KorAP is up and running
-        run: count=0; while test $count -lt 25 && ! docker-compose -p korap logs | grep -E "Listening at.*:64543"; do count=$((count+1)); echo "waiting ${count}s"; sleep 1; done; sleep 10
+        run: count=0; while test $count -lt 25 && ! docker compose -p korap logs | grep -E "Listening at.*:64543"; do count=$((count+1)); echo "waiting ${count}s"; sleep 1; done; sleep 10
       - name: Test that API delivers some search hits
         run: test $(curl --silent 'http://localhost:64543/api/v1.0/search?q=geht&ql=poliqarp&cq=corpusSigle=DCK' | jq '.matches | length') -gt 10
       - name: Test that UI delivers some search hits
         run: test $(curl --silent 'http://localhost:64543?q=geht&ql=poliqarp&cq=corpusSigle=DCK' | grep -c snippet) -gt 10
       - name: Stop KorAP
-        run: INDEX=./index docker-compose -p korap --profile=lite stop
+        run: INDEX=./index docker compose -p korap --profile=lite stop
       - name: Test that super_client_info does not exist
         run: test ! -f super_client_info
       - name: Create kalamar.production.conf
@@ -34,9 +34,9 @@ jobs:
           mkdir -p data
           echo "{Kalamar=>{plugins=>['Auth']},'Kalamar-Auth'=>{client_file=>'/kalamar/super_client_info'}}" > data/kalamar.production.conf
       - name: Start KorAP - full
-        run: INDEX=./index docker-compose -p korap --profile=full up -d
+        run: INDEX=./index docker compose -p korap --profile=full up -d
       - name: Wait until KorAP is up and running
-        run: count=0; while test $count -lt 25 && ! docker-compose -p korap logs | grep "Web application available at"; do count=$((count+1)); echo "waiting ${count}s"; sleep 1; done; sleep 10
+        run: count=0; while test $count -lt 25 && ! docker compose -p korap logs | grep "Web application available at"; do count=$((count+1)); echo "waiting ${count}s"; sleep 1; done; sleep 10
       - name: Test that super_client_info exists
         run: test -f data/super_client_info
       - name: Test that API delivers some search hits
@@ -70,12 +70,12 @@ jobs:
         run: xvfb-run --auto-servernum npm test
 
       - name: Stop KorAP
-        run: docker-compose -p korap --profile=full stop
+        run: docker compose -p korap --profile=full stop
 
       - name: Start KorAP with example index
-        run: INDEX='example-index' docker-compose -p korap-example-index --profile=example --profile=lite up -d
+        run: INDEX='example-index' docker compose -p korap-example-index --profile=example --profile=lite up -d
       - name: Wait until KorAP with example index is up and running
-        run: count=0; while test $count -lt 25 && ! docker-compose -p korap-example-index logs | grep -E "Listening at.*:64543"; do count=$((count+1)); echo "waiting ${count}s"; sleep 1; done; sleep 10
+        run: count=0; while test $count -lt 25 && ! docker compose -p korap-example-index logs | grep -E "Listening at.*:64543"; do count=$((count+1)); echo "waiting ${count}s"; sleep 1; done; sleep 10
       - name: Test that API delivers some search hits on example index
         run: test $(curl --silent 'http://localhost:64543/api/v1.0/search?q=%5Btt%2Fl%3Dgut+%26+tt%2Fp%3DADJD%5D&ql=poliqarp' | jq '.matches | length') -gt 10
       - name: Test that UI delivers some search hits on example index
@@ -88,4 +88,4 @@ jobs:
         run: xvfb-run --auto-servernum npm test
 
       - name: Stop KorAP
-        run: docker-compose -p korap-example-index --profile=lite --profile=example stop
+        run: docker compose -p korap-example-index --profile=lite --profile=example stop
