@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0445a3fb_d9090a81",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6
+      },
+      "writtenOn": "2024-09-03T11:20:58Z",
+      "side": 1,
+      "message": "We probably won\u0027t find a single compose.yaml that works on Linux, Windows and GitHub CI Linux (let alone MacOS arm64)",
+      "revId": "5bcb0ac554df798697b33da970735f144b31bef3",
+      "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
+    }
+  ]
+}
