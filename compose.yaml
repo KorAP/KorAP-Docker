@@ -40,9 +40,7 @@ services:
       KALAMAR_PLUGINS: "Auth"
       KALAMAR_CLIENT_FILE: "/kalamar/super_client_info"
     volumes:
-      - type: bind
-        source: "${PWD}/data/super_client_info"
-        target: "/kalamar/super_client_info"
+      - ${PWD}/data/super_client_info:/kalamar/super_client_info:z
     depends_on:
       kustvakt-full:
         condition: service_started
