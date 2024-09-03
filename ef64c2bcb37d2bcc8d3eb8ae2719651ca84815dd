@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ffaf1f1_2c219817",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19
+      },
+      "writtenOn": "2024-09-03T14:22:16Z",
+      "side": 1,
+      "message": "Forgot to remove the mounting.",
+      "revId": "ef64c2bcb37d2bcc8d3eb8ae2719651ca84815dd",
+      "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
+    }
+  ]
+}
