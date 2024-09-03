@@ -6,49 +6,49 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
+      - name: Set up data directory
+        run: mkdir -p data
       - name: Convert TEI input to KorAP-XML
-        run:  docker run --rm -v ${PWD}/example:/data korap/kalamar:latest-conv tei2korapxml --inline-tokens '!cmc#morpho' --input /data/dck-part1.i5.xml > dck.zip
+        run:  docker run --rm -v ${PWD}/example:/data korap/kalamar:latest tei2korapxml --no-tokenizer --inline-tokens '!cmc#morpho' --input /data/dck-part1.i5.xml > dck.zip
       - name: Convert KorAP-XML to Krill
         run: |
           mkdir json
-          docker run --rm -u root -v ${PWD}:/kalamar/data:z korap/kalamar:latest-conv korapxml2krill archive -z -i /kalamar/data/dck.zip --jobs -1 --token 'cmc#morpho' --base-paragraphs 'DeReKo#Structure' --base-sentences 'DeReKo#Structure'   -o ./data/json/
+          docker run --rm -u root -v ${PWD}:/kalamar/data:z korap/kalamar:latest korapxml2krill archive -z -i /kalamar/data/dck.zip --jobs -1 --token 'cmc#morpho' --base-paragraphs 'DeReKo#Structure' --base-sentences 'DeReKo#Structure'   -o ./data/json/
       - name: Build index
         run: |
           mkdir index
-          docker run -u root --rm -v ${PWD}:/data:z korap/kustvakt Krill-Indexer.jar -c /kustvakt/kustvakt-lite.conf -i /data/json -o /data/index/
-      - name: Create kalamar.production.conf
-        run: echo "{Kalamar=>{plugins=>['Auth']},'Kalamar-Auth'=>{client_file=>'/kalamar/super_client_info'}}" > kalamar.production.conf
+          INDEX=./index docker run -u root --rm -v ${PWD}:/data:z korap/kustvakt Krill-Indexer.jar -c /kustvakt/kustvakt-lite.conf -i /data/json -o /data/index/
       - name: Start KorAP - lite
-        run: INDEX=./index docker-compose --profile=lite up -d
+        run: INDEX=./index docker compose -p korap --profile=lite up -d
       - name: Wait until KorAP is up and running
-        run: count=0; while test $count -lt 25 && ! INDEX=./index docker-compose --profile=lite logs | grep "Initiating Jersey"; do count=$((count+1)); echo "waiting ${count}s"; sleep 1; done; sleep 10
+        run: count=0; while test $count -lt 25 && ! docker compose -p korap logs | grep -E "Listening at.*:64543"; do count=$((count+1)); echo "waiting ${count}s"; sleep 1; done; sleep 10
       - name: Test that API delivers some search hits
         run: test $(curl --silent 'http://localhost:64543/api/v1.0/search?q=geht&ql=poliqarp&cq=corpusSigle=DCK' | jq '.matches | length') -gt 10
       - name: Test that UI delivers some search hits
         run: test $(curl --silent 'http://localhost:64543?q=geht&ql=poliqarp&cq=corpusSigle=DCK' | grep -c snippet) -gt 10
       - name: Stop KorAP
-        run: INDEX=./index docker-compose --profile=lite stop
+        run: INDEX=./index docker compose -p korap --profile=lite stop
       - name: Test that super_client_info does not exist
         run: test ! -f super_client_info
       - name: Start KorAP - full
-        run: INDEX=./index docker-compose --profile=full up -d
+        run: INDEX=./index docker compose -p korap --profile=full up -d
       - name: Wait until KorAP is up and running
-        run: count=0; while test $count -lt 25 && ! INDEX=./index docker-compose --profile=full logs | grep "Initiating Jersey"; do count=$((count+1)); echo "waiting ${count}s"; sleep 1; done; sleep 10
+        run: count=0; while test $count -lt 25 && ! docker compose -p korap logs | grep "Web application available at"; do count=$((count+1)); echo "waiting ${count}s"; sleep 1; done; sleep 10
       - name: Test that super_client_info exists
-        run: test -f super_client_info
+        run: test -f data/super_client_info
       - name: Test that API delivers some search hits
         run: test $(curl --silent 'http://localhost:64543/api/v1.0/search?q=geht&ql=poliqarp&cq=corpusSigle=DCK' | jq '.matches | length') -gt 10
       - name: Test that UI delivers some search hits
         run: test $(curl --silent 'http://localhost:64543?q=geht&ql=poliqarp&cq=corpusSigle=DCK' | grep -c snippet) -gt 10
 
       - name: Checkout KorAP/KorAP-E2E-Tests
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: KorAP/KorAP-E2E-Tests
           path: KorAP-E2E-Tests
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           cache: npm
           node-version: latest
@@ -57,7 +57,7 @@ jobs:
         working-directory: ./KorAP-E2E-Tests
         run: npm ci
       - name: Setup cache for Chromium binary
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ~/.cache/puppeteer/chrome
           key: ubuntu-latest-chromium-${{ hashFiles('packages/puppeteer-core/src/revisions.ts') }}
@@ -68,4 +68,22 @@ jobs:
         run: xvfb-run --auto-servernum npm test
 
       - name: Stop KorAP
-        run: INDEX=./index docker-compose --profile=full stop
+        run: docker compose -p korap --profile=full stop
+
+      - name: Start KorAP with example index
+        run: INDEX='example-index' docker compose -p korap-example-index --profile=example --profile=lite up -d
+      - name: Wait until KorAP with example index is up and running
+        run: count=0; while test $count -lt 25 && ! docker compose -p korap-example-index logs | grep -E "Listening at.*:64543"; do count=$((count+1)); echo "waiting ${count}s"; sleep 1; done; sleep 10
+      - name: Test that API delivers some search hits on example index
+        run: test $(curl --silent 'http://localhost:64543/api/v1.0/search?q=%5Btt%2Fl%3Dgut+%26+tt%2Fp%3DADJD%5D&ql=poliqarp' | jq '.matches | length') -gt 10
+      - name: Test that UI delivers some search hits on example index
+        run: test $(curl --silent 'http://localhost:64543?q=%5Btt%2Fl%3Dgut+%26+tt%2Fp%3DADJD%5D&ql=poliqarp' | grep -c snippet) -gt 10
+      - name: Run end-to-end tests on example index
+        working-directory: ./KorAP-E2E-Tests
+        env:
+          KORAP_LOGIN: ""
+          KORAP_QUERIES: "[corenlp/p=VAFIN][]{2}[marmot/m=number:sg][opennlp/p=PPER][tt/l=er][tt/p=ADV]"
+        run: xvfb-run --auto-servernum npm test
+
+      - name: Stop KorAP
+        run: docker compose -p korap-example-index --profile=lite --profile=example stop
