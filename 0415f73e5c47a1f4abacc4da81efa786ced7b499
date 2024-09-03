@@ -33,6 +33,24 @@
       "message": "Yes, it\u0027s a docker plugin since 2020, but we did not notice on our CentOs 7 machines.",
       "revId": "0415f73e5c47a1f4abacc4da81efa786ced7b499",
       "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2fd3b68_01c512e7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19
+      },
+      "writtenOn": "2024-09-03T08:42:18Z",
+      "side": 1,
+      "message": "The `docker-compose` notation doesn\u0027t indicate that it is the v1 python script. The go executable is also written like that - and works standalone as well. The installation guide as a CLI plugin was introduced later (I guess when docker started to support CLI plugins that way) - I always used it directly as a binary, but we can switch to the now recommended plugin-installation.",
+      "parentUuid": "0a8f8dce_64d0bde3",
+      "revId": "0415f73e5c47a1f4abacc4da81efa786ced7b499",
+      "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
     }
   ]
 }
