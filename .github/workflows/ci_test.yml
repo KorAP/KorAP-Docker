@@ -7,6 +7,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Set up data directory
+        run: mkdir -p data
       - name: Convert TEI input to KorAP-XML
         run:  docker run --rm -v ${PWD}/example:/data korap/kalamar:latest tei2korapxml --no-tokenizer --inline-tokens '!cmc#morpho' --input /data/dck-part1.i5.xml > dck.zip
       - name: Convert KorAP-XML to Krill
