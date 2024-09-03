@@ -16,6 +16,23 @@
       "message": "I added the hint, that compose is required to be installed as a CLI plugin. v2 was required before as per readme. Regarding the version: I have no idea, if this changes anything regarding the dependency behaviour. I just remember it was a bit version dependent, if the order was followed strictly when I first set up the compose file. Would be nice if that\u0027s no longer the case.",
       "revId": "0415f73e5c47a1f4abacc4da81efa786ced7b499",
       "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a8f8dce_64d0bde3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6
+      },
+      "writtenOn": "2024-09-03T08:31:57Z",
+      "side": 1,
+      "message": "Yes, it\u0027s a docker plugin since 2020, but we did not notice on our CentOs 7 machines.",
+      "revId": "0415f73e5c47a1f4abacc4da81efa786ced7b499",
+      "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
     }
   ]
 }
