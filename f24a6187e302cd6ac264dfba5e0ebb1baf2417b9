@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eda65882_46536a5c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6
+      },
+      "writtenOn": "2024-09-03T16:04:37Z",
+      "side": 1,
+      "message": "Makes it work on Fedora 40",
+      "revId": "f24a6187e302cd6ac264dfba5e0ebb1baf2417b9",
+      "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
+    }
+  ]
+}
