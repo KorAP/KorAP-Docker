@@ -50,7 +50,8 @@ This will make the frontend be available at
 To use your own index, please follow the instructions
 on [Corpus Conversion](#corpus-conversion) first.
 
-To run the service with a user management system, start it with
+To run the service with a user management system, first create a directory
+`data` in your working directory and then start it with
 
 ```shell
 INDEX=./index docker compose -p korap --profile=full up
