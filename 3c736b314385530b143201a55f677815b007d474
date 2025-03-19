@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d787bb16_ac8e7e61",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19
+      },
+      "writtenOn": "2025-03-19T16:16:05Z",
+      "side": 1,
+      "message": "Requires the new Kalamar image v0.59 (without the new UI) I will prepare (later today or tomorrow). I will inform Andreas afterwards.",
+      "revId": "3c736b314385530b143201a55f677815b007d474",
+      "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
+    }
+  ]
+}
