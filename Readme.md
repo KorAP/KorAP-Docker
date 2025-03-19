@@ -83,7 +83,8 @@ docker run --rm \
   tei2korapxml \
   --inline-tokens '!cmc#morpho' \
   --no-tokenizer \
-  --input /data/dck-part1.i5.xml > dck.zip
+  --input /data/dck-part1.i5.xml \
+  --output dck.zip
 ```
 
 ... will convert the i5 file into a
@@ -108,13 +109,13 @@ mkdir json
 docker run --rm -u root \
   -v ${PWD}:/kalamar/data:z korap/kalamar:latest\
   korapxml2krill archive \
-  -z \
-  -i /kalamar/data/dck.zip \
+  --gzip \
+  --input /kalamar/data/dck.zip \
   --jobs -1 \
   --token 'cmc#morpho' \
   --base-paragraphs 'DeReKo#Structure' \
   --base-sentences 'DeReKo#Structure' \
-  -o ./data/json/
+  --output ./data/json/
 ```
 
 ... will use [korapxml2krill](https://github.com/KorAP/KorAP-XML-Krill).
@@ -160,7 +161,7 @@ $env:INDEX='example-index'; $env:PWD='.'; docker compose -p korap --profile=lite
 
 **Authors**: [Nils Diewald](https://www.nils-diewald.de/), Harald Lüngen, Marc Kupietz
 
-Copyright (c) 2022-2024, [IDS Mannheim](https://www.ids-mannheim.de/), Germany
+Copyright (c) 2022-2025, [IDS Mannheim](https://www.ids-mannheim.de/), Germany
 
 KorAP-Docker is published under the BSD-2 License.
 
