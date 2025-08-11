@@ -6,7 +6,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Set up data directory
         run: mkdir -p data
       - name: Convert TEI input to KorAP-XML
@@ -43,7 +43,7 @@ jobs:
         run: test $(curl --silent 'http://localhost:64543?q=geht&ql=poliqarp&cq=corpusSigle=DCK' | grep -c snippet) -gt 10
 
       - name: Checkout KorAP/KorAP-E2E-Tests
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           repository: KorAP/KorAP-E2E-Tests
           path: KorAP-E2E-Tests
