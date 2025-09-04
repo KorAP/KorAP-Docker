@@ -48,7 +48,7 @@ jobs:
           repository: KorAP/KorAP-E2E-Tests
           path: KorAP-E2E-Tests
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           cache: npm
           node-version: latest
