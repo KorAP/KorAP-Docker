@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab532683_31517b9a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19
+      },
+      "writtenOn": "2025-10-02T10:21:39Z",
+      "side": 1,
+      "message": "This requires the profiles in an .env file or as environment variables (not as --profile). But that\u0027s more flexible nonetheless. It\u0027s not yet working with the proxy (probably because of the internal network), but I am working on it. In the end, th \"export\" profile is all that\u0027s needed to add this plugin. The way it is done should be expandable for other plugins (or KorapSRU).",
+      "revId": "17ddfa77e7ea1dbade43e5a0b4d6db0585655f94",
+      "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
+    }
+  ]
+}
