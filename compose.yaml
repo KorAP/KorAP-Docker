@@ -9,15 +9,33 @@ services:
       - "example-index:/kustvakt/index"
     restart: "no"
   kalamar:
-    image: "korap/kalamar:latest"
+    image: "korap/kalamar:0.60b"
     ports:
       - "64543:64543"
     environment:
       KALAMAR_API: "http://kustvakt:8089/api/"
+      COMPOSE_PROFILES: ${COMPOSE_PROFILES}
     depends_on:
       - kustvakt
     profiles:
       - lite
+    entrypoint: []
+    command: >
+      sh -c '
+        if echo "$$COMPOSE_PROFILES" | grep -q "export"; then
+          # Should better be retrieved by the export plugin service using curl
+          PLUGINJSON="{ name => \"Export\", desc => \"Exports Kalamar results\", embed => [{ panel => \"result\", title => \"exports KWICs and snippets\" , icon => \"\134uf019\", classes => [\"button-icon\",\"plugin\"], onClick => { action => \"addWidget\", template => \"/plugin/export/export\", permissions => [\"forms\",\"scripts\", \"downloads\" ]}}]},";
+          PLUGINPROXY="{ root_path => \"/plugin/export/\", mount => \"http://kalamar-export:7777/\", service => \"export-plugin-proxy\" },";
+          if ! grep -F -q "/plugin/export/export" /kalamar/kalamar.production.conf; then
+            cat /kalamar/kalamar.production.conf | perl -pe "s!\047PLUGIN_STUB\047!$$PLUGINJSON\047PLUGIN_STUB\047!;" > /kalamar/kalamar.production.tmp.conf;
+            mv /kalamar/kalamar.production.tmp.conf /kalamar/kalamar.production.conf
+          fi;
+          if ! grep -F -q "export-plugin-proxy" /kalamar/kalamar.production.conf; then
+            cat /kalamar/kalamar.production.conf | perl -pe "s!\047PROXY_STUB\047!$$PLUGINPROXY\047PROXY_STUB\047!;" > /kalamar/kalamar.production.tmp.conf;
+            mv /kalamar/kalamar.production.tmp.conf /kalamar/kalamar.production.conf
+          fi;
+          cat /kalamar/kalamar.production.conf;
+        fi || true; perl script/kalamar daemon -l http://0.0.0.0:64543'
     restart: "unless-stopped"
   full-init:
     image: "korap/kalamar:latest"
@@ -50,6 +68,11 @@ services:
       - full
     restart: "unless-stopped"
     user: root
+  kalamar-export:
+    image: "korap/kalamar-plugin-export:latest"
+    profiles:
+      - export
+    restart: "unless-stopped"
   kustvakt:
     image: "korap/kustvakt:latest"
     expose:
