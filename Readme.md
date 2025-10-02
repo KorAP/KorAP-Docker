@@ -34,6 +34,12 @@ INDEX='example-index' docker compose -p korap --profile=lite --profile=example u
 to start the example image and the service with Linux
 (See [here](#Windows) for more information on Windows).
 
+To include the export plugin, add the export profile:
+
+```shell
+COMPOSE_PROFILES="export" INDEX='example-index' docker compose -p korap --profile=lite --profile=example --profile=export up
+```
+
 Otherwise it's possible to download the sample index provided by
 [Kustvakt](https://github.com/KorAP/Kustvakt/tree/master/sample-index).
 To download, intialize and run KorAP pointing to that index folder
