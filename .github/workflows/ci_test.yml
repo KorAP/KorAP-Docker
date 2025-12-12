@@ -57,7 +57,7 @@ jobs:
         working-directory: ./KorAP-E2E-Tests
         run: npm ci
       - name: Setup cache for Chromium binary
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: ~/.cache/puppeteer/chrome
           key: ubuntu-latest-chromium-${{ hashFiles('packages/puppeteer-core/src/revisions.ts') }}
