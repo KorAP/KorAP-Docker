@@ -74,7 +74,7 @@ services:
     restart: "unless-stopped"
     user: root
   kalamar-export:
-    image: "korap/kalamar-plugin-export:0.3.4"
+    image: "korap/kalamar-plugin-export:0.4.1"
     environment:
       KALAMAR_EXPORT_API_HOST: "kustvakt"
       KALAMAR_EXPORT_API_PORT: "8089"
