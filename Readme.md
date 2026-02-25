@@ -28,26 +28,26 @@ To get KorAP running, an index is required.
 For testing, there is a test index available as a docker image. Just run
 
 ```shell
-INDEX='example-index' docker compose -p korap --profile=lite --profile=example up
+COMPOSE_PROFILES="open,example" INDEX='example-index' docker compose -p korap up
 ```
 
 to start the example image and the service with Linux
 (See [here](#Windows) for more information on Windows).
 
-To include the export plugin, add the export profile:
+To run without the export plugin, set `KALAMAR_EXPORT=false` or omit `export` from `COMPOSE_PROFILES`:
 
 ```shell
-COMPOSE_PROFILES="export" INDEX='example-index' docker compose -p korap --profile=lite --profile=example --profile=export up
+COMPOSE_PROFILES="open,example" KALAMAR_EXPORT=false INDEX='example-index' docker compose -p korap up
 ```
 
-Otherwise it's possible to download the sample index provided by
+It's also possible to download the sample index provided by
 [Kustvakt](https://github.com/KorAP/Kustvakt/tree/master/sample-index).
 To download, intialize and run KorAP pointing to that index folder
 (in this example stored in the `index` folder in the local directory),
 run
 
 ```shell
-INDEX=./index docker compose -p korap --profile=lite up
+COMPOSE_PROFILES="open" INDEX=./index docker compose -p korap up
 ```
 
 This will make the frontend be available at
@@ -60,7 +60,7 @@ To run the service with a user management system, first create a directory
 `data` in your working directory and then start it with
 
 ```shell
-INDEX=./index docker compose -p korap --profile=full up
+COMPOSE_PROFILES="auth" INDEX=./index docker compose -p korap up
 ```
 
 Login with `user1` and `password1`. To change authentication settings, see the `/kusvakt/ldap` folder inside the docker container and Kustvakt's [LDAP Settings Wiki](https://github.com/KorAP/Kustvakt/wiki/LDAP-Setting) for documentation.
@@ -155,11 +155,11 @@ call and is searchable via the browser.
 ## Windows
 
 Windows with Powershell requires environment variables to pass in a different way.
-In addition the `PWD` variable is not set beforehand. To run, e.g., the KorAP one-liner
+In addition the `PWD` variable is not set beforehand. To run the KorAP one-liner
 with Windows, you have to start
 
 ```powershell
-$env:INDEX='example-index'; $env:PWD='.'; docker compose -p korap --profile=lite --profile=example up
+$env:INDEX='example-index'; $env:PWD='.'; $env:COMPOSE_PROFILES='open,example'; docker compose -p korap up
 
 ```
 
