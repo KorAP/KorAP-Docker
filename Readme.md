@@ -5,17 +5,8 @@ consists of several independent components,
 but they can easily be installed together using
 [Docker](https://www.docker.com/).
 This repository contains a recipe to install all
-components needed to run KorAP on a local machine
+components needed to run KorAP on your own local machine
 with a single command.
-
-In addition, all relevant tools are installed and
-made available that are necessary for data conversion
-and indexing of corpora in the widely used TEI-P5
-([I5](https://www.ids-mannheim.de/en/digspra/corpus-linguistics/projects/corpus-development/ids-text-model/))
-format for KorAP.
-For different options of the tools we refer to the
-respective repositories.
-
 
 ## Requirements
 
@@ -67,90 +58,7 @@ Login with `user1` and `password1`. To change authentication settings, see the `
 
 ## Corpus Conversion
 
-In order to create an index based on existing
-corpus data, some conversion steps are usually
-necessary.
-In the case of a conversion from TEI P5
-([I5](https://www.ids-mannheim.de/en/digspra/corpus-linguistics/projects/corpus-development/ids-text-model/)) format,
-the tools required for this have already been installed
-with the command above.
-
-In the following we take the open part of the
-[Dortmunder Chatkorpus 2.2](https://www.uni-due.de/germanistik/chatkorpus/)
-(Beißwenger & Storrer 2008) as an example to build an index.
-
-The file is located at `example/dck-part1.i5.xml`.
-
-The command ...
-
-```shell
-docker run --rm \
-  -v ${PWD}/example:/data:z korap/kalamar:latest \
-  tei2korapxml \
-  --inline-tokens '!cmc#morpho' \
-  --no-tokenizer \
-  --input /data/dck-part1.i5.xml \
-  --output dck.zip
-```
-
-... will convert the i5 file into a
-[KorAP-XML](https://github.com/KorAP/KorAP-XML-Krill#about-korap-xml)
-file using
-[tei2korapxml](https://github.com/KorAP/KorAP-XML-TEI).
-
-This format is designed to add further arbitrary annotations
-to the primary data. In this example, however, we will stick
-with the inline annotations that the example corpus already
-contains and will make available later under the label `cmc`.
-
-To convert the KorAP-XML archive in a second step
-into individual [Krill](https://github.com/KorAP/Krill) compatible
-JSON files, the following command ...
-
-```shell
-mkdir json
-```
-
-```shell
-docker run --rm -u root \
-  -v ${PWD}:/kalamar/data:z korap/kalamar:latest\
-  korapxml2krill archive \
-  --gzip \
-  --input /kalamar/data/dck.zip \
-  --jobs -1 \
-  --token 'cmc#morpho' \
-  --base-paragraphs 'DeReKo#Structure' \
-  --base-sentences 'DeReKo#Structure' \
-  --output ./data/json/
-```
-
-... will use [korapxml2krill](https://github.com/KorAP/KorAP-XML-Krill).
-
-Depending on how the source data is designed,
-different parameters must be specified for the conversion.
-
-Here, the inline token annotation is used as the basis for
-word tokenization, and the included document structure is 
-used for default annotation of sentence and paragraph boundaries.
-
-
-## Index Creation
-
-[Krill](https://github.com/KorAP/Krill)'s indexer tool can now
-be used to index the JSON files:
-
-```shell
-mkdir index
-```
-
-```shell
-docker run -u root --rm -v ${PWD}:/data:z korap/kustvakt \
-  Krill-Indexer.jar -c /kustvakt/kustvakt-lite.conf \
-  -i /data/json -o /data/index/
-```
-
-After that, the index can be loaded with the aforementioned
-call and is searchable via the browser.
+As of June 2026, the corpus conversion, annotation and indexing process has been significantly simplified and is now orchestrated by [KorAP-Ingestion](https://github.com/KorAP/KorAP-Ingestion). In many cases, a simple `make` command is sufficient to ingest your TEI XML data and launch your own KorAP instance. For comprehensive instructions and advanced options, please refer to the [KorAP-Ingestion](https://github.com/KorAP/KorAP-Ingestion) documentation.
 
 ## Windows
 
@@ -167,7 +75,7 @@ $env:INDEX='example-index'; $env:PWD='.'; $env:COMPOSE_PROFILES='open,example'; 
 
 **Authors**: [Nils Diewald](https://www.nils-diewald.de/), Harald Lüngen, Marc Kupietz
 
-Copyright (c) 2022-2025, [IDS Mannheim](https://www.ids-mannheim.de/), Germany
+Copyright (c) 2022-2026, [IDS Mannheim](https://www.ids-mannheim.de/), Germany
 
 KorAP-Docker is published under the BSD-2 License.
 
