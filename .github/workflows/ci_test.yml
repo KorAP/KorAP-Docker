@@ -19,8 +19,8 @@ jobs:
         run: |
           mkdir index
           INDEX=./index docker run -u root --rm -v ${PWD}:/data:z korap/kustvakt Krill-Indexer.jar -c /kustvakt/kustvakt-lite.conf -i /data/json -o /data/index/
-      - name: Start KorAP - lite
-        run: INDEX=./index docker compose -p korap --profile=lite up -d
+      - name: Start KorAP - open
+        run: COMPOSE_PROFILES="open" INDEX=./index docker compose -p korap up -d
       - name: Wait until KorAP is up and running
         run: count=0; while test $count -lt 25 && ! docker compose -p korap logs | grep -E "Listening at.*:64543"; do count=$((count+1)); echo "waiting ${count}s"; sleep 1; done; sleep 10
       - name: Test that API delivers some search hits
@@ -28,11 +28,11 @@ jobs:
       - name: Test that UI delivers some search hits
         run: test $(curl --silent 'http://localhost:64543?q=geht&ql=poliqarp&cq=corpusSigle=DCK' | grep -c snippet) -gt 10
       - name: Stop KorAP
-        run: INDEX=./index docker compose -p korap --profile=lite stop
+        run: COMPOSE_PROFILES="open" INDEX=./index docker compose -p korap stop
       - name: Test that super_client_info does not exist
         run: test ! -f super_client_info
-      - name: Start KorAP - full
-        run: INDEX=./index docker compose -p korap --profile=full up -d
+      - name: Start KorAP - auth
+        run: COMPOSE_PROFILES="auth" INDEX=./index docker compose -p korap up -d
       - name: Wait until KorAP is up and running
         run: count=0; while test $count -lt 25 && ! docker compose -p korap logs | grep "Web application available at"; do count=$((count+1)); echo "waiting ${count}s"; sleep 1; done; sleep 10
       - name: Test that super_client_info exists
@@ -68,10 +68,10 @@ jobs:
         run: xvfb-run --auto-servernum npm test
 
       - name: Stop KorAP
-        run: docker compose -p korap --profile=full stop
+        run: COMPOSE_PROFILES="auth" docker compose -p korap stop
 
       - name: Start KorAP with example index
-        run: INDEX='example-index' docker compose -p korap-example-index --profile=example --profile=lite up -d
+        run: COMPOSE_PROFILES="open,example" INDEX='example-index' docker compose -p korap-example-index up -d
       - name: Wait until KorAP with example index is up and running
         run: count=0; while test $count -lt 25 && ! docker compose -p korap-example-index logs | grep -E "Listening at.*:64543"; do count=$((count+1)); echo "waiting ${count}s"; sleep 1; done; sleep 10
       - name: Test that API delivers some search hits on example index
@@ -86,4 +86,4 @@ jobs:
         run: xvfb-run --auto-servernum npm test
 
       - name: Stop KorAP
-        run: docker compose -p korap-example-index --profile=lite --profile=example stop
+        run: COMPOSE_PROFILES="open,example" docker compose -p korap-example-index stop
