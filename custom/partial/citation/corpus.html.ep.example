@@ -1,0 +1,14 @@
+%# References for your own corpus. Copy this file to
+%# partial/citation/corpus.html.ep (without the .example suffix) and refer to
+%# it from your references page as
+%#   %= include 'partial/citation', corpus_citation => 'custom/partial/citation/corpus'
+%#
+%# The <span class="Z3988"> below is optional: it carries the reference as
+%# COinS metadata, which lets reference managers such as Zotero import the
+%# entry with one click. Leave it out if you do not need that.
+<section>
+  <h4><%= loc 'corpusPub' %></h4>
+
+  <p class="bibentry">Doe, Jane/Roe, Richard (2026): <cite><a class="extern" href="https://example.org/corpus">The Example Corpus</a></cite>.<br />Example Town: Example Institute. <a class="extern" href="https://doi.org/10.0000/example">https://doi.org/10.0000/example</a>.
+  </p>
+</section>

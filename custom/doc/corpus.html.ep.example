@@ -1,0 +1,18 @@
+%# Describes the corpus this KorAP instance serves. Copy this file to
+%# doc/corpus.html.ep (without the .example suffix) and edit it; it then
+%# replaces Kalamar's placeholder page behind the "Corpus" menu entry.
+%# Lines starting with %# are comments and never appear in the page.
+% layout 'main', title => 'KorAP: ' . loc('Nav_corpus');
+
+%= page_title
+
+<section>
+  <p>
+    This KorAP instance serves the <strong>Example Corpus</strong>, a
+    collection of ... texts with ... million tokens, compiled by ... .
+  </p>
+  <p>
+    The texts are annotated with ... . Please refer to the
+    <a href="citation">references</a> when citing the corpus.
+  </p>
+</section>

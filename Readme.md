@@ -56,6 +56,32 @@ COMPOSE_PROFILES="auth" INDEX=./index docker compose -p korap up
 
 Login with `user1` and `password1`. To change authentication settings, see the `/kusvakt/ldap` folder inside the docker container and Kustvakt's [LDAP Settings Wiki](https://github.com/KorAP/Kustvakt/wiki/LDAP-Setting) for documentation.
 
+## Describing Your Own Corpus
+
+The documentation pages of the user interface can be adapted without rebuilding
+the Kalamar image: the `custom/` directory of this repository is mounted into
+the container, and Kalamar serves a documentation page from there whenever it
+does not ship one itself. To describe the corpus you are serving, copy the
+example and edit it:
+
+```shell
+cp custom/doc/corpus.html.ep.example custom/doc/corpus.html.ep
+$EDITOR custom/doc/corpus.html.ep
+docker compose restart kalamar
+```
+
+The page is then served at `/doc/corpus`. Kalamar's documentation menu has no
+corpus entry of its own; to add one, mount your own `templates/doc/navigation.json`
+over the one Kalamar ships. `custom/` also contains examples for a references
+page listing how to cite your corpus. See [custom/README.md](custom/README.md)
+for details, and set `KALAMAR_TEMPLATES` to keep the templates somewhere else:
+
+```shell
+KALAMAR_TEMPLATES=/path/to/my-templates COMPOSE_PROFILES="open" INDEX=./index docker compose -p korap up
+```
+
+This requires Kalamar 0.66 or later.
+
 ## Corpus Conversion
 
 As of June 2026, the corpus conversion, annotation and indexing process has been significantly simplified and is now orchestrated by [KorAP-Ingestion](https://github.com/KorAP/KorAP-Ingestion). In many cases, a simple `make` command is sufficient to ingest your TEI XML data and launch your own KorAP instance. For comprehensive instructions and advanced options, please refer to the [KorAP-Ingestion](https://github.com/KorAP/KorAP-Ingestion) documentation.

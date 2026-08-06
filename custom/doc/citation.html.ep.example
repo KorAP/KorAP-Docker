@@ -1,0 +1,15 @@
+%# Adds a references page at /doc/citation. Copy this file to
+%# doc/citation.html.ep (without the .example suffix).
+%#
+%# The page is assembled from three parts: the references for your corpus,
+%# plus the KorAP and annotation-tool references that Kalamar ships and you
+%# normally keep unchanged. Pass your own corpus references as shown below;
+%# see partial/citation/corpus.html.ep.example.
+%#
+%# Kalamar's documentation menu has no entry for this page, so link it from
+%# your corpus page (see doc/corpus.html.ep.example).
+% layout 'main', title => 'KorAP: ' . loc('Nav_citation', 'References');
+
+%= page_title
+
+%= include 'partial/citation', corpus_citation => 'custom/partial/citation/corpus'

@@ -1,0 +1,5 @@
+# Only the examples are part of the repository; the templates you derive from
+# them are yours and stay untracked.
+*.html.ep
+*.html.md
+!*.example

@@ -32,12 +32,15 @@ services:
       - "example-index:/kustvakt/index"
     restart: "no"
   kalamar:
-    image: "korap/kalamar:0.65"
+    image: ${KALAMAR_IMAGE:-korap/kalamar:0.65}
     ports:
       - "64543:64543"
     environment:
       KALAMAR_API: "http://kustvakt:8089/api/"
       KALAMAR_EXPORT: ${KALAMAR_EXPORT:-true}
+    volumes:
+      # Templates describing your own corpus; see custom/README.md.
+      - ${KALAMAR_TEMPLATES:-./custom}:/kalamar/templates/custom:ro
     depends_on:
       - kustvakt
     profiles:
@@ -67,6 +70,8 @@ services:
       KALAMAR_EXPORT: ${KALAMAR_EXPORT:-true}
     volumes:
       - ${PWD}/data/super_client_info:/kalamar/super_client_info:z
+      # Templates describing your own corpus; see custom/README.md.
+      - ${KALAMAR_TEMPLATES:-./custom}:/kalamar/templates/custom:ro
     depends_on:
       kustvakt-auth:
         condition: service_started
