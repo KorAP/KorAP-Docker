@@ -54,7 +54,9 @@ To run the service with a user management system, first create a directory
 COMPOSE_PROFILES="auth" INDEX=./index docker compose -p korap up
 ```
 
-Login with `user1` and `password1`. To change authentication settings, see the `/kusvakt/ldap` folder inside the docker container and Kustvakt's [LDAP Settings Wiki](https://github.com/KorAP/Kustvakt/wiki/LDAP-Setting) for documentation.
+Login with `user1` and `password1`. To change authentication settings, see the `/kustvakt/ldap` folder inside the docker container and Kustvakt's [LDAP Settings Wiki](https://github.com/KorAP/Kustvakt/wiki/LDAP-Setting) for documentation.
+
+On first start, Kustvakt's default configuration is copied to `data/kustvakt.conf`, where it can be adjusted (e.g. `ldap.config` or the `availability.regex.*` access policies). It is not overwritten on later starts, so remove it to get the default configuration of a newer Kustvakt image.
 
 ## Describing Your Own Corpus
 

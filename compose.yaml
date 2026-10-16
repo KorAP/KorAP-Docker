@@ -9,7 +9,7 @@ x-kalamar-export-setup: &export-setup
           mv /kalamar/kalamar.production.tmp.conf /kalamar/kalamar.production.conf;
         fi;
         # Should better be retrieved by the export plugin service using curl
-        PLUGINJSON="{ name => \"Export\", desc => \"Exports Kalamar results\", embed => [{ panel => \"result\", title => \"exports KWICs and snippets\" , icon => \"\134x{f019}\", classes => [\"button-icon\",\"plugin\"], onClick => { action => \"addWidget\", template => \"/plugin/export/export\", permissions => [\"forms\",\"scripts\", \"downloads\" ]}}]},";
+        PLUGINJSON="{ name => \"Export\", desc => \"Exports Kalamar results\", embed => [{ panel => \"result\", title => \"exports KWICs and snippets\" , icon => \"\134x{f019}\", classes => [\"button-icon\",\"plugin\"], onClick => { action => \"addWidget\", template => \"/plugin/export/export\", permissions => [\"forms\",\"scripts\", \"downloads\", \"same-origin\" ]}}]},";
         PLUGINPROXY="{ root_path => \"/plugin/export/\", mount => \"http://kalamar-export:7777/\", service => \"export-plugin-proxy\" },";
         if ! grep -F -q "/plugin/export/export" /kalamar/kalamar.production.conf; then
           cat /kalamar/kalamar.production.conf | perl -pe "s!\047PLUGIN_STUB\047!$$PLUGINJSON\047PLUGIN_STUB\047!;" > /kalamar/kalamar.production.tmp.conf;
@@ -109,8 +109,24 @@ services:
         aliases:
           - kustvakt-api
     restart: "unless-stopped"
+  kustvakt-auth-init:
+    # Copy the image's default full configuration to ./data/kustvakt.conf,
+    # unless it already exists, as the bind mount below hides it.
+    image: "korap/kustvakt:latest"
+    entrypoint: ["cp", "-n", "/kustvakt/data/kustvakt.conf", "/data/kustvakt.conf"]
+    command: []
+    volumes:
+      - type: bind
+        source: "${PWD}/data/"
+        target: /data/
+    profiles:
+      - auth
+    user: root
+    restart: "no"
   kustvakt-auth:
-    image: "korap/kustvakt:latest-full"
+    image: "korap/kustvakt:latest"
+    # The same image runs the lite version by default
+    command: ["Kustvakt.jar", "--full"]
     expose:
       - 8089
     user: root
@@ -123,6 +139,8 @@ services:
       - auth
     depends_on:
       auth-init:
+        condition: service_completed_successfully
+      kustvakt-auth-init:
         condition: service_completed_successfully
     networks:
       default:
