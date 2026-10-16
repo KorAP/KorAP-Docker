@@ -18,7 +18,7 @@ jobs:
       - name: Build index
         run: |
           mkdir index
-          INDEX=./index docker run -u root --rm -v ${PWD}:/data:z korap/kustvakt Krill-Indexer.jar -c /kustvakt/kustvakt-lite.conf -i /data/json -o /data/index/
+          INDEX=./index docker run -u root --rm -v ${PWD}:/data:z korap/kustvakt Krill-Indexer.jar -c /kustvakt/data/kustvakt-lite.conf -i /data/json -o /data/index/
       - name: Start KorAP - open
         run: COMPOSE_PROFILES="open" INDEX=./index docker compose -p korap up -d
       - name: Wait until KorAP is up and running
