@@ -2,10 +2,14 @@ x-kalamar-export-setup: &export-setup
   entrypoint: []
   command: >
     sh -c '
+      if [ -f /kalamar/conf/kalamar.conf ]; then
+        echo "Using custom configuration conf/kalamar.conf";
+        cp /kalamar/conf/kalamar.conf /kalamar/kalamar.production.conf;
+      fi;
       if [ "$$KALAMAR_EXPORT" != "false" ]; then
         echo "Hacking in selective CSP policy...";
         if ! grep -q "script-src.*unsafe-inline" /kalamar/kalamar.production.conf; then
-          cat /kalamar/kalamar.production.conf | perl -pe "s/\\{/\\{CSP=>{q!frame-src!=>[q!self!]},/" > /kalamar/kalamar.production.tmp.conf;
+          cat /kalamar/kalamar.production.conf | perl -0pe "s/\\{/\\{CSP=>{q!frame-src!=>[q!self!]},/" > /kalamar/kalamar.production.tmp.conf;
           mv /kalamar/kalamar.production.tmp.conf /kalamar/kalamar.production.conf;
         fi;
         # Should better be retrieved by the export plugin service using curl
@@ -41,6 +45,8 @@ services:
     volumes:
       # Templates describing your own corpus; see custom/README.md.
       - ${KALAMAR_TEMPLATES:-./custom}:/kalamar/templates/custom:ro
+      # Custom Kalamar configuration; see conf/README.md.
+      - ${KALAMAR_CONF_DIR:-./conf}:/kalamar/conf:ro,z
     depends_on:
       - kustvakt
     profiles:
@@ -72,6 +78,8 @@ services:
       - ${PWD}/data/super_client_info:/kalamar/super_client_info:z
       # Templates describing your own corpus; see custom/README.md.
       - ${KALAMAR_TEMPLATES:-./custom}:/kalamar/templates/custom:ro
+      # Custom Kalamar configuration; see conf/README.md.
+      - ${KALAMAR_CONF_DIR:-./conf}:/kalamar/conf:ro,z
     depends_on:
       kustvakt-auth:
         condition: service_started

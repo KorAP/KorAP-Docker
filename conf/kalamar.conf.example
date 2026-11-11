@@ -1,0 +1,22 @@
+# Kalamar configuration in Perl syntax.
+#
+# Copy this file to kalamar.conf and adapt it. It replaces the configuration
+# shipped with the Kalamar image completely, so keep the two placeholders
+# PROXY_STUB and PLUGIN_STUB if you want the export plugin to be added.
+{
+  Kalamar => {
+    plugins => ['KorAPXML2Krill', 'Tei2KorAPXML', 'KorAPXML2CoNLLU', 'Plugins'],
+    proxies => ['PROXY_STUB'],
+    # examplecorpus => 'mycorpus',
+  },
+  'Kalamar-Plugins' => {
+    default => ['PLUGIN_STUB'],
+  },
+  Localize => {
+    override => 1,
+    dict => {
+      # Shown below the logo and in the page title
+      title_addon => 'MyCorpus',
+    },
+  },
+}

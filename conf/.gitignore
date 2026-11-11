@@ -1,0 +1,6 @@
+# Only the examples are part of the repository; the configuration you derive
+# from them is yours and stays untracked.
+*
+!.gitignore
+!README.md
+!*.example

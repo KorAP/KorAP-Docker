@@ -92,6 +92,20 @@ KALAMAR_TEMPLATES=/path/to/my-templates COMPOSE_PROFILES="open" INDEX=./index do
 
 This requires Kalamar 0.66 or later.
 
+## Customizing the Configuration
+
+To adapt Kalamar's configuration beyond the environment variables above
+(e.g. the title addon, localization or plugins), copy the example
+configuration and edit it:
+
+```shell
+cp conf/kalamar.conf.example conf/kalamar.conf
+```
+
+If `conf/kalamar.conf` exists, it replaces the configuration shipped with
+the Kalamar image. See [conf/README.md](conf/README.md) for details, and set
+`KALAMAR_CONF_DIR` to keep the configuration somewhere else.
+
 ## Corpus Conversion
 
 As of June 2026, the corpus conversion, annotation and indexing process has been significantly simplified and is now orchestrated by [KorAP-Ingestion](https://github.com/KorAP/KorAP-Ingestion). In many cases, a simple `make` command is sufficient to ingest your TEI XML data and launch your own KorAP instance. For comprehensive instructions and advanced options, please refer to the [KorAP-Ingestion](https://github.com/KorAP/KorAP-Ingestion) documentation.
