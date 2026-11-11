@@ -13,7 +13,7 @@ x-kalamar-export-setup: &export-setup
           mv /kalamar/kalamar.production.tmp.conf /kalamar/kalamar.production.conf;
         fi;
         # Should better be retrieved by the export plugin service using curl
-        PLUGINJSON="{ name => \"Export\", desc => \"Exports Kalamar results\", embed => [{ panel => \"result\", title => \"exports KWICs and snippets\" , icon => \"\134x{f019}\", classes => [\"button-icon\",\"plugin\"], onClick => { action => \"addWidget\", template => \"/plugin/export/export\", permissions => [\"forms\",\"scripts\", \"downloads\", \"same-origin\" ]}}]},";
+        PLUGINJSON="{ name => \"Export\", desc => \"Exports Kalamar results\", embed => [{ panel => \"result\", title => \"exports KWICs and snippets\" , icon => \"\134x{f019}\", classes => [\"button-icon\",\"plugin\"], onClick => { action => \"addWidget\", template => \"$$KALAMAR_EXPORT_URL\", permissions => [\"forms\",\"scripts\", \"downloads\", \"same-origin\" ]}}]},";
         PLUGINPROXY="{ root_path => \"/plugin/export/\", mount => \"http://kalamar-export:7777/\", service => \"export-plugin-proxy\" },";
         if ! grep -F -q "/plugin/export/export" /kalamar/kalamar.production.conf; then
           cat /kalamar/kalamar.production.conf | perl -pe "s!\047PLUGIN_STUB\047!$$PLUGINJSON\047PLUGIN_STUB\047!;" > /kalamar/kalamar.production.tmp.conf;
@@ -42,6 +42,8 @@ services:
     environment:
       KALAMAR_API: "http://kustvakt:8089/api/"
       KALAMAR_EXPORT: ${KALAMAR_EXPORT:-true}
+      # Absolute https URL required if Kalamar is served via https
+      KALAMAR_EXPORT_URL: ${KALAMAR_EXPORT_URL:-/plugin/export/export}
     volumes:
       # Templates describing your own corpus; see custom/README.md.
       - ${KALAMAR_TEMPLATES:-./custom}:/kalamar/templates/custom:ro
@@ -74,6 +76,8 @@ services:
       KALAMAR_PLUGINS: "Auth"
       KALAMAR_CLIENT_FILE: "/kalamar/super_client_info"
       KALAMAR_EXPORT: ${KALAMAR_EXPORT:-true}
+      # Absolute https URL required if Kalamar is served via https
+      KALAMAR_EXPORT_URL: ${KALAMAR_EXPORT_URL:-/plugin/export/export}
     volumes:
       - ${PWD}/data/super_client_info:/kalamar/super_client_info:z
       # Templates describing your own corpus; see custom/README.md.

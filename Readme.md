@@ -92,6 +92,16 @@ KALAMAR_TEMPLATES=/path/to/my-templates COMPOSE_PROFILES="open" INDEX=./index do
 
 This requires Kalamar 0.66 or later.
 
+## Serving via HTTPS
+
+If Kalamar is served via HTTPS (e.g. behind a reverse proxy), the export
+plugin has to be referred to by an absolute `https` URL, otherwise it is
+rejected as insecure by the browser:
+
+```shell
+KALAMAR_EXPORT_URL=https://korap.example.org/plugin/export/export COMPOSE_PROFILES="open" INDEX=./index docker compose -p korap up
+```
+
 ## Customizing the Configuration
 
 To adapt Kalamar's configuration beyond the environment variables above
