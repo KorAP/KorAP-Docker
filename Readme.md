@@ -44,6 +44,14 @@ COMPOSE_PROFILES="open" INDEX=./index docker compose -p korap up
 This will make the frontend be available at
 `localhost:64543`.
 
+To use a different host port (e.g. to run alongside an existing
+KorAP installation), set `KALAMAR_PORT`. It may include a bind address,
+e.g. to make the frontend only reachable locally or via an SSH tunnel:
+
+```shell
+KALAMAR_PORT=127.0.0.1:3543 COMPOSE_PROFILES="open" INDEX=./index docker compose -p korap up
+```
+
 To use your own index, please follow the instructions
 on [Corpus Conversion](#corpus-conversion) first.
 

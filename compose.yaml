@@ -34,7 +34,7 @@ services:
   kalamar:
     image: ${KALAMAR_IMAGE:-korap/kalamar:0.65}
     ports:
-      - "64543:64543"
+      - "${KALAMAR_PORT:-64543}:64543"
     environment:
       KALAMAR_API: "http://kustvakt:8089/api/"
       KALAMAR_EXPORT: ${KALAMAR_EXPORT:-true}
@@ -62,7 +62,7 @@ services:
   kalamar-auth:
     image: "korap/kalamar:latest"
     ports:
-      - "64543:64543"
+      - "${KALAMAR_PORT:-64543}:64543"
     environment:
       KALAMAR_API: "http://kustvakt-auth:8089/api/"
       KALAMAR_PLUGINS: "Auth"
