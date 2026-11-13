@@ -36,7 +36,7 @@ services:
       - "example-index:/kustvakt/index"
     restart: "no"
   kalamar:
-    image: ${KALAMAR_IMAGE:-korap/kalamar:0.65}
+    image: ${KALAMAR_IMAGE:-korap/kalamar:0.67.0-beta.2}
     ports:
       - "${KALAMAR_PORT:-64543}:64543"
     environment:
@@ -56,7 +56,7 @@ services:
     <<: *export-setup
     restart: "unless-stopped"
   auth-init:
-    image: "korap/kalamar:latest"
+    image: ${KALAMAR_IMAGE:-korap/kalamar:0.67.0-beta.2}
     command: super_client_info kalamar /kalamar/data/super_client_info
     volumes:
       - type: bind
@@ -68,7 +68,7 @@ services:
     user: root
     restart: "no"
   kalamar-auth:
-    image: "korap/kalamar:latest"
+    image: ${KALAMAR_IMAGE:-korap/kalamar:0.67.0-beta.2}
     ports:
       - "${KALAMAR_PORT:-64543}:64543"
     environment:
