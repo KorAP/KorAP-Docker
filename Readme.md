@@ -25,7 +25,7 @@ COMPOSE_PROFILES="open,example" INDEX='example-index' docker compose -p korap up
 to start the example image and the service with Linux
 (See [here](#Windows) for more information on Windows).
 
-To run without the export plugin, set `KALAMAR_EXPORT=false` or omit `export` from `COMPOSE_PROFILES`:
+To hide the export plugin in Kalamar, set `KALAMAR_EXPORT=false`:
 
 ```shell
 COMPOSE_PROFILES="open,example" KALAMAR_EXPORT=false INDEX='example-index' docker compose -p korap up
@@ -93,6 +93,9 @@ KALAMAR_TEMPLATES=/path/to/my-templates COMPOSE_PROFILES="open" INDEX=./index do
 This requires Kalamar 0.66 or later.
 
 ## Serving via HTTPS
+
+The export service is reached through Kalamar's internal proxy at
+`/plugin/export/`. No separate public port is needed for the export service.
 
 If Kalamar is served via HTTPS (e.g. behind a reverse proxy), the export
 plugin has to be referred to by an absolute `https` URL, otherwise it is
