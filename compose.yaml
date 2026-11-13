@@ -109,7 +109,7 @@ services:
       - export
     restart: "unless-stopped"
   kustvakt:
-    image: "korap/kustvakt:latest"
+    image: "korap/kustvakt:1.4"
     expose:
       - 8089
     volumes:
@@ -124,7 +124,7 @@ services:
   kustvakt-auth-init:
     # Copy the image's default full configuration to ./data/kustvakt.conf,
     # unless it already exists, as the bind mount below hides it.
-    image: "korap/kustvakt:latest"
+    image: "korap/kustvakt:1.4"
     entrypoint: ["cp", "-n", "/kustvakt/data/kustvakt.conf", "/data/kustvakt.conf"]
     command: []
     volumes:
@@ -136,7 +136,7 @@ services:
     user: root
     restart: "no"
   kustvakt-auth:
-    image: "korap/kustvakt:latest"
+    image: "korap/kustvakt:1.4"
     # The same image runs the lite version by default
     command: ["Kustvakt.jar", "--full"]
     expose:
