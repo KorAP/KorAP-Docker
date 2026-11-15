@@ -18,17 +18,11 @@ Things to keep in mind:
 
 - The file is a [Mojolicious configuration][mojo-config] in Perl syntax,
   i.e. a single hash reference.
-- Keep the placeholders `'PROXY_STUB'` (in `Kalamar => { proxies => [...] }`)
-  and `'PLUGIN_STUB'` (in `'Kalamar-Plugins' => { default => [...] }`), unless
-  you run with `KALAMAR_EXPORT=false`. They are replaced by the settings of the
-  export plugin on start.
 - Settings passed as environment variables, such as `KALAMAR_API` or
   `KALAMAR_PLUGINS`, still apply.
 - Further files, e.g. additional localization dictionaries, can be put here
   as well and referred to as `conf/...`, e.g.
   `Localize => { resources => ['conf/kalamar.ro.dict'] }`.
-- With `KALAMAR_EXPORT` enabled, the resulting configuration is printed to the
-  container log on start, so better keep secrets in separate files.
 
 To keep your configuration somewhere else, set `KALAMAR_CONF_DIR` to that
 directory.

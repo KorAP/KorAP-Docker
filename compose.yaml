@@ -1,4 +1,4 @@
-x-kalamar-export-setup: &export-setup
+x-kalamar-setup: &kalamar-setup
   entrypoint: []
   command: >
     sh -c '
@@ -6,25 +6,8 @@ x-kalamar-export-setup: &export-setup
         echo "Using custom configuration conf/kalamar.conf";
         cp /kalamar/conf/kalamar.conf /kalamar/kalamar.production.conf;
       fi;
-      if [ "$$KALAMAR_EXPORT" != "false" ]; then
-        echo "Hacking in selective CSP policy...";
-        if ! grep -q "script-src.*unsafe-inline" /kalamar/kalamar.production.conf; then
-          cat /kalamar/kalamar.production.conf | perl -0pe "s/\\{/\\{CSP=>{q!frame-src!=>[q!self!]},/" > /kalamar/kalamar.production.tmp.conf;
-          mv /kalamar/kalamar.production.tmp.conf /kalamar/kalamar.production.conf;
-        fi;
-        # Should better be retrieved by the export plugin service using curl
-        PLUGINJSON="{ name => \"Export\", desc => \"Exports Kalamar results\", embed => [{ panel => \"result\", title => \"exports KWICs and snippets\" , icon => \"\134x{f019}\", classes => [\"button-icon\",\"plugin\"], onClick => { action => \"addWidget\", template => \"$$KALAMAR_EXPORT_URL\", permissions => [\"forms\",\"scripts\", \"downloads\", \"same-origin\" ]}}]},";
-        PLUGINPROXY="{ root_path => \"/plugin/export/\", mount => \"http://kalamar-export:7777/\", service => \"export-plugin-proxy\" },";
-        if ! grep -F -q "/plugin/export/export" /kalamar/kalamar.production.conf; then
-          cat /kalamar/kalamar.production.conf | perl -pe "s!\047PLUGIN_STUB\047!$$PLUGINJSON\047PLUGIN_STUB\047!;" > /kalamar/kalamar.production.tmp.conf;
-          mv /kalamar/kalamar.production.tmp.conf /kalamar/kalamar.production.conf
-        fi;
-        if ! grep -F -q "export-plugin-proxy" /kalamar/kalamar.production.conf; then
-          cat /kalamar/kalamar.production.conf | perl -pe "s!\047PROXY_STUB\047!$$PLUGINPROXY\047PROXY_STUB\047!;" > /kalamar/kalamar.production.tmp.conf;
-          mv /kalamar/kalamar.production.tmp.conf /kalamar/kalamar.production.conf
-        fi;
-        cat /kalamar/kalamar.production.conf;
-      fi || true; perl script/kalamar daemon -l http://0.0.0.0:64543'
+      if [ "$$KALAMAR_EXPORT" = "false" ]; then unset KALAMAR_EXPORT_SERVICE; fi;
+      perl script/kalamar daemon -l http://0.0.0.0:64543'
 volumes:
   example-index:
 services:
@@ -36,14 +19,13 @@ services:
       - "example-index:/kustvakt/index"
     restart: "no"
   kalamar:
-    image: ${KALAMAR_IMAGE:-docker.io/korap/kalamar:0.67.0-beta.2}
+    image: ${KALAMAR_IMAGE:-docker.io/korap/kalamar:0.67.0-beta.3}
     ports:
       - "${KALAMAR_PORT:-64543}:64543"
     environment:
       KALAMAR_API: "http://kustvakt:8089/api/"
       KALAMAR_EXPORT: ${KALAMAR_EXPORT:-true}
-      # Absolute https URL required if Kalamar is served via https
-      KALAMAR_EXPORT_URL: ${KALAMAR_EXPORT_URL:-/plugin/export/export}
+      KALAMAR_EXPORT_SERVICE: "http://kalamar-export:7777"
     volumes:
       # Templates describing your own corpus; see custom/README.md.
       - ${KALAMAR_TEMPLATES:-./custom}:/kalamar/templates/custom:ro,z
@@ -53,10 +35,10 @@ services:
       - kustvakt
     profiles:
       - open
-    <<: *export-setup
+    <<: *kalamar-setup
     restart: "unless-stopped"
   auth-init:
-    image: ${KALAMAR_IMAGE:-docker.io/korap/kalamar:0.67.0-beta.2}
+    image: ${KALAMAR_IMAGE:-docker.io/korap/kalamar:0.67.0-beta.3}
     command: super_client_info kalamar /kalamar/data/super_client_info
     volumes:
       - type: bind
@@ -70,7 +52,7 @@ services:
     user: root
     restart: "no"
   kalamar-auth:
-    image: ${KALAMAR_IMAGE:-docker.io/korap/kalamar:0.67.0-beta.2}
+    image: ${KALAMAR_IMAGE:-docker.io/korap/kalamar:0.67.0-beta.3}
     ports:
       - "${KALAMAR_PORT:-64543}:64543"
     environment:
@@ -78,8 +60,7 @@ services:
       KALAMAR_PLUGINS: "Auth"
       KALAMAR_CLIENT_FILE: "/kalamar/data/super_client_info"
       KALAMAR_EXPORT: ${KALAMAR_EXPORT:-true}
-      # Absolute https URL required if Kalamar is served via https
-      KALAMAR_EXPORT_URL: ${KALAMAR_EXPORT_URL:-/plugin/export/export}
+      KALAMAR_EXPORT_SERVICE: "http://kalamar-export:7777"
     volumes:
       # The directory, not the file: Podman would create a missing file as a directory
       - ${PWD}/data/:/kalamar/data:ro,z
@@ -94,11 +75,11 @@ services:
         condition: service_completed_successfully
     profiles:
       - auth
-    <<: *export-setup
+    <<: *kalamar-setup
     restart: "unless-stopped"
     user: root
   kalamar-export:
-    image: "docker.io/korap/kalamar-plugin-export:0.4.3"
+    image: "docker.io/korap/kalamar-plugin-export:0.5.0-beta.1"
     environment:
       KALAMAR_EXPORT_API_HOST: "kustvakt-api"
       KALAMAR_EXPORT_API_PORT: "8089"
