@@ -29,14 +29,14 @@ volumes:
   example-index:
 services:
   examplecontainer:
-    image: "korap/example-index:0.1"
+    image: "docker.io/korap/example-index:0.1"
     profiles:
       - example
     volumes:
       - "example-index:/kustvakt/index"
     restart: "no"
   kalamar:
-    image: ${KALAMAR_IMAGE:-korap/kalamar:0.67.0-beta.2}
+    image: ${KALAMAR_IMAGE:-docker.io/korap/kalamar:0.67.0-beta.2}
     ports:
       - "${KALAMAR_PORT:-64543}:64543"
     environment:
@@ -46,7 +46,7 @@ services:
       KALAMAR_EXPORT_URL: ${KALAMAR_EXPORT_URL:-/plugin/export/export}
     volumes:
       # Templates describing your own corpus; see custom/README.md.
-      - ${KALAMAR_TEMPLATES:-./custom}:/kalamar/templates/custom:ro
+      - ${KALAMAR_TEMPLATES:-./custom}:/kalamar/templates/custom:ro,z
       # Custom Kalamar configuration; see conf/README.md.
       - ${KALAMAR_CONF_DIR:-./conf}:/kalamar/conf:ro,z
     depends_on:
@@ -56,32 +56,35 @@ services:
     <<: *export-setup
     restart: "unless-stopped"
   auth-init:
-    image: ${KALAMAR_IMAGE:-korap/kalamar:0.67.0-beta.2}
+    image: ${KALAMAR_IMAGE:-docker.io/korap/kalamar:0.67.0-beta.2}
     command: super_client_info kalamar /kalamar/data/super_client_info
     volumes:
       - type: bind
         source: "${PWD}/data/"
         target: "/kalamar/data"
+        bind:
+          selinux: z
     profiles:
       - auth
       - init
     user: root
     restart: "no"
   kalamar-auth:
-    image: ${KALAMAR_IMAGE:-korap/kalamar:0.67.0-beta.2}
+    image: ${KALAMAR_IMAGE:-docker.io/korap/kalamar:0.67.0-beta.2}
     ports:
       - "${KALAMAR_PORT:-64543}:64543"
     environment:
       KALAMAR_API: "http://kustvakt-auth:8089/api/"
       KALAMAR_PLUGINS: "Auth"
-      KALAMAR_CLIENT_FILE: "/kalamar/super_client_info"
+      KALAMAR_CLIENT_FILE: "/kalamar/data/super_client_info"
       KALAMAR_EXPORT: ${KALAMAR_EXPORT:-true}
       # Absolute https URL required if Kalamar is served via https
       KALAMAR_EXPORT_URL: ${KALAMAR_EXPORT_URL:-/plugin/export/export}
     volumes:
-      - ${PWD}/data/super_client_info:/kalamar/super_client_info:z
+      # The directory, not the file: Podman would create a missing file as a directory
+      - ${PWD}/data/:/kalamar/data:ro,z
       # Templates describing your own corpus; see custom/README.md.
-      - ${KALAMAR_TEMPLATES:-./custom}:/kalamar/templates/custom:ro
+      - ${KALAMAR_TEMPLATES:-./custom}:/kalamar/templates/custom:ro,z
       # Custom Kalamar configuration; see conf/README.md.
       - ${KALAMAR_CONF_DIR:-./conf}:/kalamar/conf:ro,z
     depends_on:
@@ -95,7 +98,7 @@ services:
     restart: "unless-stopped"
     user: root
   kalamar-export:
-    image: "korap/kalamar-plugin-export:0.4.3"
+    image: "docker.io/korap/kalamar-plugin-export:0.4.3"
     environment:
       KALAMAR_EXPORT_API_HOST: "kustvakt-api"
       KALAMAR_EXPORT_API_PORT: "8089"
@@ -109,7 +112,7 @@ services:
       - export
     restart: "unless-stopped"
   kustvakt:
-    image: "korap/kustvakt:1.4"
+    image: "docker.io/korap/kustvakt:1.4"
     expose:
       - 8089
     volumes:
@@ -124,19 +127,21 @@ services:
   kustvakt-auth-init:
     # Copy the image's default full configuration to ./data/kustvakt.conf,
     # unless it already exists, as the bind mount below hides it.
-    image: "korap/kustvakt:1.4"
+    image: "docker.io/korap/kustvakt:1.4"
     entrypoint: ["cp", "-n", "/kustvakt/data/kustvakt.conf", "/data/kustvakt.conf"]
     command: []
     volumes:
       - type: bind
         source: "${PWD}/data/"
         target: /data/
+        bind:
+          selinux: z
     profiles:
       - auth
     user: root
     restart: "no"
   kustvakt-auth:
-    image: "korap/kustvakt:1.4"
+    image: "docker.io/korap/kustvakt:1.4"
     # The same image runs the lite version by default
     command: ["Kustvakt.jar", "--full"]
     expose:
@@ -147,6 +152,8 @@ services:
       - type: bind
         source: "${PWD}/data/"
         target: /kustvakt/data/
+        bind:
+          selinux: z
     profiles:
       - auth
     depends_on:

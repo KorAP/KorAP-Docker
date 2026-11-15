@@ -13,6 +13,23 @@ with a single command.
 Install [docker](https://www.docker.com/) and
 [docker compose](https://github.com/docker/compose) (>= v2; as a CLI plugin).
 
+### Rootless alternative: Podman
+
+Where a Docker daemon running as root is not acceptable, the same
+`compose.yaml` runs with rootless [Podman](https://podman.io/).
+Let `docker compose` talk to Podman's user socket,
+then use the commands below unchanged:
+
+```shell
+systemctl --user enable --now podman.socket
+export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/podman/podman.sock
+```
+
+To have the containers survive logout and reboot, also run
+`loginctl enable-linger $USER` and `systemctl --user enable podman-restart`.
+`podman-compose` works for the `open` profile only, as it cannot
+wait for the init containers of the `auth` profile.
+
 ## Starting
 
 To get KorAP running, an index is required.
