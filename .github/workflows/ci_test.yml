@@ -56,11 +56,10 @@ jobs:
       - name: Install dependencies of KorAP-E2E-Tests
         working-directory: ./KorAP-E2E-Tests
         run: npm ci
-      - name: Setup cache for Chromium binary
-        uses: actions/cache@v5
-        with:
-          path: ~/.cache/puppeteer/chrome
-          key: ubuntu-latest-chromium-${{ hashFiles('packages/puppeteer-core/src/revisions.ts') }}
+      # Newer npm versions do not run the install script of Puppeteer
+      - name: Install browser for Puppeteer
+        working-directory: ./KorAP-E2E-Tests
+        run: npx puppeteer browsers install chrome-headless-shell
       - name: Install Linux dependencies
         run: sudo apt-get install xvfb
       - name: Run end-to-end tests
