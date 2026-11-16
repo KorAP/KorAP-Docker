@@ -1,0 +1,36 @@
+name: korap-downtime-test
+services:
+  calendar:
+    image: korap/kalamar:downtime-test
+    entrypoint: [perl, /test/calendar.pl]
+    command: [daemon, -l, 'http://0.0.0.0:8080']
+    volumes:
+      - .:/test:ro,z
+  kalamar:
+    image: korap/kalamar:downtime-test
+    build:
+      context: ../../../Kalamar-Instance-IDS/docker/downtime
+      additional_contexts:
+        kalamar_source: ../../../Kalamar
+        downtime_release: ../../../Mojolicious-Plugin-DowntimeCalendar/dist
+    entrypoint: [perl, script/kalamar]
+    command: [daemon, -l, 'http://0.0.0.0:64543']
+    ports:
+      - '${DOWNTIME_TEST_BIND:-0.0.0.0}:${DOWNTIME_TEST_PORT:-64543}:64543'
+    environment:
+      KORAP_HOSTNAME: '${HOSTNAME:?Export HOSTNAME or set it for this Compose command}'
+      KALAMAR_PLUGINS: DowntimeCalendar,DowntimeCalendarDiagnostics
+      KALAMAR_API: http://kustvakt:8089/api/
+      DOWNTIME_CALENDAR_URL: http://calendar:8080/calendar.ics
+      PERL5LIB: /test/lib:/opt/downtime-perl/lib/perl5
+    volumes:
+      - .:/test:ro,z
+    depends_on:
+      - calendar
+    networks:
+      - default
+      - backend
+networks:
+  backend:
+    external: true
+    name: '${DOWNTIME_BACKEND_NETWORK:-korap_default}'
