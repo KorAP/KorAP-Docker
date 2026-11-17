@@ -9,10 +9,8 @@ services:
   kalamar:
     image: korap/kalamar:downtime-test
     build:
-      context: ../../../Kalamar-Instance-IDS/docker/downtime
-      additional_contexts:
-        kalamar_source: ../../../Kalamar
-        downtime_release: ../../../Mojolicious-Plugin-DowntimeCalendar/dist
+      context: ../../../Kalamar
+      target: kalamar
     entrypoint: [perl, script/kalamar]
     command: [daemon, -l, 'http://0.0.0.0:64543']
     ports:
@@ -22,7 +20,7 @@ services:
       KALAMAR_PLUGINS: DowntimeCalendar,DowntimeCalendarDiagnostics
       KALAMAR_API: http://kustvakt:8089/api/
       DOWNTIME_CALENDAR_URL: http://calendar:8080/calendar.ics
-      PERL5LIB: /test/lib:/opt/downtime-perl/lib/perl5
+      PERL5LIB: /test/lib
     volumes:
       - .:/test:ro,z
     depends_on:

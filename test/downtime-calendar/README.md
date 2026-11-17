@@ -1,6 +1,6 @@
 This test is maintained on the dedicated `downtime-calendar-test` branch.
-The production image recipe and deployment overlay belong to
-`../Kalamar-Instance-IDS`, not the general KorAP-Docker setup.
+The test builds the regular `../Kalamar/Dockerfile` with the optional calendar
+package included by default. The general KorAP-Docker recipe stays unchanged.
 
 # Local downtime-calendar test
 
@@ -30,8 +30,8 @@ perl test/downtime-calendar/prepare-calendar.pl --config "$HOME/derekovecs/examp
 ```
 
 Port 64543 must be free. Stop any other local frontend using it, or set
-`DOWNTIME_TEST_PORT=64544` below. Build the plugin release first (`../Mojolicious-Plugin-DowntimeCalendar/script/release v0.02`
-from that checkout), then build and start the test:
+`DOWNTIME_TEST_PORT=64544` below. Build and start the test; the pinned plugin is fetched during the normal
+Kalamar image build:
 
 ```sh
 HOSTNAME=worker-05 docker compose -f test/downtime-calendar/compose.yaml build kalamar
@@ -84,7 +84,8 @@ external backend network and the backend containers remain available. Any
 previously stopped stack can then be started again using its original recipe.
 
 The test uses the regular optional Kalamar adapter, versioned partial and built
-SCSS through `../Kalamar-Instance-IDS/docker/downtime/Dockerfile`, exactly like the deployment overlay.
+SCSS through the regular `../Kalamar/Dockerfile`, exactly like a normal image
+build. IDS activation lives in its existing instance configuration.
 There are no copied or mounted intro templates/stylesheets. Only the fixture
 server and the schedule-only diagnostic route are test-specific. The regular
 production adapter defines no diagnostic endpoint. The integration must be
