@@ -128,6 +128,11 @@ its internal proxy at `/export/`. No separate public port and no further
 setting is needed for the export service, also if Kalamar is served via
 HTTPS (e.g. behind a reverse proxy).
 
+When upgrading from the iframe export, remove custom Export entries from
+plugin lists and proxy mappings for `/plugin/export/`. `KALAMAR_EXPORT_URL`
+is no longer used. The reverse proxy should forward all Kalamar paths,
+including `/export/`; it needs no separate rule for the export service.
+
 ## Customizing the Configuration
 
 To adapt Kalamar's configuration beyond the environment variables above
