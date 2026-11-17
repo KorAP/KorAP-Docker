@@ -1,6 +1,6 @@
 This test is maintained on the dedicated `downtime-calendar-test` branch.
-The test builds the regular `../Kalamar/Dockerfile` with the optional calendar
-package included by default. The general KorAP-Docker recipe stays unchanged.
+The test builds the regular `../Kalamar/Dockerfile` from a checkout containing
+the bundled calendar sources. The general KorAP-Docker recipe stays unchanged.
 
 # Local downtime-calendar test
 
@@ -30,8 +30,8 @@ perl test/downtime-calendar/prepare-calendar.pl --config "$HOME/derekovecs/examp
 ```
 
 Port 64543 must be free. Stop any other local frontend using it, or set
-`DOWNTIME_TEST_PORT=64544` below. Build and start the test; the pinned plugin is fetched during the normal
-Kalamar image build:
+`DOWNTIME_TEST_PORT=64544` below. Build and start the test; the regular Kalamar source tree already contains the
+calendar implementation, and its dependencies use the normal Perl setup:
 
 ```sh
 HOSTNAME=worker-05 docker compose -f test/downtime-calendar/compose.yaml build kalamar
