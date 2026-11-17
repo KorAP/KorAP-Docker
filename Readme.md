@@ -11,7 +11,7 @@ with a single command.
 ## Requirements
 
 Install [docker](https://www.docker.com/) and
-[docker compose](https://github.com/docker/compose) (>= v2; as a CLI plugin).
+[docker compose](https://github.com/docker/compose) (>= v2.15.1; as a CLI plugin).
 
 ### Rootless alternative: Podman
 
@@ -82,6 +82,18 @@ COMPOSE_PROFILES="auth" INDEX=./index docker compose -p korap up
 Login with `user1` and `password1`. To change authentication settings, see the `/kustvakt/ldap` folder inside the docker container and Kustvakt's [LDAP Settings Wiki](https://github.com/KorAP/Kustvakt/wiki/LDAP-Setting) for documentation.
 
 On first start, Kustvakt's default configuration is copied to `data/kustvakt.conf`, where it can be adjusted (e.g. `ldap.config` or the `availability.regex.*` access policies). It is not overwritten on later starts, so remove it to get the default configuration of a newer Kustvakt image.
+
+## Host identity for maintenance notices
+
+On Linux, the Kalamar services use `uts: host` to discover the physical host's
+name automatically. This works with Docker and rootless Podman. There is no
+hostname to maintain when copying the deployment or renaming a server; restart
+Kalamar after a rename so the calendar refreshes its host identity.
+
+When enabling the optional downtime calendar in your instance configuration,
+leave `KORAP_HOSTNAME` unset for automatic discovery. To keep a fixed calendar
+identity, set `KORAP_HOSTNAME` explicitly; it overrides automatic discovery.
+The calendar remains optional and is not enabled by this Compose setting.
 
 ## Describing Your Own Corpus
 

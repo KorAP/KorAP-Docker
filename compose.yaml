@@ -1,4 +1,6 @@
 x-kalamar-setup: &kalamar-setup
+  # Discover the physical Linux host automatically for maintenance notices.
+  uts: host
   entrypoint: []
   command: >
     sh -c '
@@ -19,12 +21,13 @@ services:
       - "example-index:/kustvakt/index"
     restart: "no"
   kalamar:
-    image: ${KALAMAR_IMAGE:-docker.io/korap/kalamar:0.67.0-beta.3}
+    image: ${KALAMAR_IMAGE:-docker.io/korap/kalamar:0.67.0-beta.6}
     ports:
       - "${KALAMAR_PORT:-64543}:64543"
     environment:
       KALAMAR_API: "http://kustvakt:8089/api/"
       KALAMAR_EXPORT: ${KALAMAR_EXPORT:-true}
+      KORAP_HOSTNAME: "${KORAP_HOSTNAME:-}"
       KALAMAR_EXPORT_SERVICE: "http://kalamar-export:7777"
     volumes:
       # Templates describing your own corpus; see custom/README.md.
@@ -38,7 +41,7 @@ services:
     <<: *kalamar-setup
     restart: "unless-stopped"
   auth-init:
-    image: ${KALAMAR_IMAGE:-docker.io/korap/kalamar:0.67.0-beta.3}
+    image: ${KALAMAR_IMAGE:-docker.io/korap/kalamar:0.67.0-beta.6}
     command: super_client_info kalamar /kalamar/data/super_client_info
     volumes:
       - type: bind
@@ -52,7 +55,7 @@ services:
     user: root
     restart: "no"
   kalamar-auth:
-    image: ${KALAMAR_IMAGE:-docker.io/korap/kalamar:0.67.0-beta.3}
+    image: ${KALAMAR_IMAGE:-docker.io/korap/kalamar:0.67.0-beta.6}
     ports:
       - "${KALAMAR_PORT:-64543}:64543"
     environment:
@@ -60,6 +63,7 @@ services:
       KALAMAR_PLUGINS: "Auth"
       KALAMAR_CLIENT_FILE: "/kalamar/data/super_client_info"
       KALAMAR_EXPORT: ${KALAMAR_EXPORT:-true}
+      KORAP_HOSTNAME: "${KORAP_HOSTNAME:-}"
       KALAMAR_EXPORT_SERVICE: "http://kalamar-export:7777"
     volumes:
       # The directory, not the file: Podman would create a missing file as a directory
