@@ -7,6 +7,7 @@ services:
     volumes:
       - .:/test:ro,z
   kalamar:
+    uts: host
     image: korap/kalamar:downtime-test
     build:
       context: ../../../Kalamar
@@ -16,7 +17,7 @@ services:
     ports:
       - '${DOWNTIME_TEST_BIND:-0.0.0.0}:${DOWNTIME_TEST_PORT:-64543}:64543'
     environment:
-      KORAP_HOSTNAME: '${HOSTNAME:?Export HOSTNAME or set it for this Compose command}'
+      KORAP_HOSTNAME: '${KORAP_HOSTNAME:-}'
       KALAMAR_PLUGINS: DowntimeCalendar,DowntimeCalendarDiagnostics
       KALAMAR_API: http://kustvakt:8089/api/
       DOWNTIME_CALENDAR_URL: http://calendar:8080/calendar.ics

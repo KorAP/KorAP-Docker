@@ -34,8 +34,8 @@ Port 64543 must be free. Stop any other local frontend using it, or set
 calendar implementation, and its dependencies use the normal Perl setup:
 
 ```sh
-HOSTNAME=worker-05 docker compose -f test/downtime-calendar/compose.yaml build kalamar
-HOSTNAME=worker-05 docker compose -f test/downtime-calendar/compose.yaml up -d
+docker compose -f test/downtime-calendar/compose.yaml build kalamar
+KORAP_HOSTNAME=worker-05 docker compose -f test/downtime-calendar/compose.yaml up -d
 ```
 
 Open **http://localhost:64543/**. The first request warms the cache; reload to
@@ -49,9 +49,9 @@ for this local test. The port binds to all IPv4 interfaces, so the frontend is
 also available at `http://<host-ip>:64543/`. Set
 `DOWNTIME_TEST_BIND=127.0.0.1` to restrict it to loopback.
 
-`HOSTNAME=worker-05` deliberately pretends to be the affected host for this
-Compose invocation; the service receives it as `KORAP_HOSTNAME`. No machine or
-container hostname is changed. By default the backend is reached through the
+`KORAP_HOSTNAME=worker-05` deliberately pretends to be the affected host for this
+Compose invocation. With no override, `uts: host` discovers the physical host
+automatically, just like the regular recipe. No machine hostname is changed. By default the backend is reached through the
 existing external Docker network `korap_default`; override
 `DOWNTIME_BACKEND_NETWORK` if needed. The test starts no additional Kustvakt.
 
@@ -64,9 +64,9 @@ prepare a separate fixture with current dates.
 
 ```sh
 python3 test/downtime-calendar/verify.py worker-05
-HOSTNAME=korap-head-02 docker compose -f test/downtime-calendar/compose.yaml up -d --no-deps kalamar
+KORAP_HOSTNAME=korap-head-02 docker compose -f test/downtime-calendar/compose.yaml up -d --no-deps kalamar
 python3 test/downtime-calendar/verify.py korap-head-02
-HOSTNAME=worker-05 docker compose -f test/downtime-calendar/compose.yaml up -d --no-deps kalamar
+KORAP_HOSTNAME=worker-05 docker compose -f test/downtime-calendar/compose.yaml up -d --no-deps kalamar
 python3 test/downtime-calendar/verify.py worker-05
 ```
 
@@ -76,7 +76,7 @@ leaves the frontend displaying worker-05's maintenance notice.
 ## Stop the test
 
 ```sh
-HOSTNAME=worker-05 docker compose -f test/downtime-calendar/compose.yaml down
+docker compose -f test/downtime-calendar/compose.yaml down
 ```
 
 This removes only the test frontend, fixture server and test network; the
