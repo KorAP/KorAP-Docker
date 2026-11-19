@@ -83,21 +83,14 @@ services:
     restart: "unless-stopped"
     user: root
   kalamar-export:
-    image: "docker.io/korap/kalamar-plugin-export:0.5.0"
-    environment:
-      KALAMAR_EXPORT_API_HOST: "kustvakt-api"
-      KALAMAR_EXPORT_API_PORT: "8089"
-      KALAMAR_EXPORT_API_SCHEME: "http"
-      KALAMAR_EXPORT_SERVER_SCHEME: "http"
-      KALAMAR_EXPORT_SERVER_HOST: "0.0.0.0"
-      KALAMAR_EXPORT_SERVER_PORT: "7777"
+    image: "docker.io/korap/kalamar-plugin-export:0.5.2"
     profiles:
       - open
       - auth
       - export
     restart: "unless-stopped"
   kustvakt:
-    image: "docker.io/korap/kustvakt:1.4"
+    image: "docker.io/korap/kustvakt:1.4.1"
     expose:
       - 8089
     volumes:
@@ -112,7 +105,7 @@ services:
   kustvakt-auth-init:
     # Copy the image's default full configuration to ./data/kustvakt.conf,
     # unless it already exists, as the bind mount below hides it.
-    image: "docker.io/korap/kustvakt:1.4"
+    image: "docker.io/korap/kustvakt:1.4.1"
     entrypoint: ["cp", "-n", "/kustvakt/data/kustvakt.conf", "/data/kustvakt.conf"]
     command: []
     volumes:
@@ -126,7 +119,7 @@ services:
     user: root
     restart: "no"
   kustvakt-auth:
-    image: "docker.io/korap/kustvakt:1.4"
+    image: "docker.io/korap/kustvakt:1.4.1"
     # The same image runs the lite version by default
     command: ["Kustvakt.jar", "--full"]
     expose:
@@ -150,6 +143,7 @@ services:
       default:
         aliases:
           - kustvakt-api
+          - kustvakt
     restart: "unless-stopped"
 configs:
   super_client_info:

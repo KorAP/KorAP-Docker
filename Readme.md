@@ -1,166 +1,99 @@
 # KorAP-Docker
 
-The [KorAP Corpus Analysis Platform](http://korap.ids-mannheim.de/)
-consists of several independent components,
-but they can easily be installed together using
-[Docker](https://www.docker.com/).
-This repository contains a recipe to install all
-components needed to run KorAP on your own local machine
-with a single command.
+Run the [KorAP Corpus Analysis Platform](https://korap.ids-mannheim.de/) locally
+with Docker Compose.
 
-## Requirements
+## Quick start with the example index
 
-Install [docker](https://www.docker.com/) and
-[docker compose](https://github.com/docker/compose) (>= v2.15.1; as a CLI plugin).
-
-### Rootless alternative: Podman
-
-Where a Docker daemon running as root is not acceptable, the same
-`compose.yaml` runs with rootless [Podman](https://podman.io/).
-Let `docker compose` talk to Podman's user socket,
-then use the commands below unchanged:
+Start Docker with Compose installed, then run the following commands. The
+example index is included as a Docker image and is loaded automatically.
 
 ```shell
-systemctl --user enable --now podman.socket
-export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/podman/podman.sock
+git clone https://github.com/KorAP/KorAP-Docker.git
+cd KorAP-Docker
+COMPOSE_PROFILES=open,example INDEX=example-index docker compose -p korap up -d
 ```
 
-To have the containers survive logout and reboot, also run
-`loginctl enable-linger $USER` and `systemctl --user enable podman-restart`.
-`podman-compose` works for the `open` profile only, as it cannot
-wait for the init containers of the `auth` profile.
+Open [http://localhost:64543](http://localhost:64543) and search for `geht`.
+The download button above the results opens the export form.
 
-## Starting
-
-To get KorAP running, an index is required.
-For testing, there is a test index available as a docker image. Just run
+To stop the example:
 
 ```shell
-COMPOSE_PROFILES="open,example" INDEX='example-index' docker compose -p korap up
+COMPOSE_PROFILES=open,example INDEX=example-index docker compose -p korap down
 ```
 
-to start the example image and the service with Linux
-(See [here](#Windows) for more information on Windows).
+See [Windows](#windows) for the PowerShell commands.
 
-To hide the export in Kalamar, set `KALAMAR_EXPORT=false`:
+## Use your own index
+
+Put a KorAP index in `./index` or set `INDEX` to its location. If you need to
+build an index from TEI XML, see [KorAP-Ingestion](https://github.com/KorAP/KorAP-Ingestion).
 
 ```shell
-COMPOSE_PROFILES="open,example" KALAMAR_EXPORT=false INDEX='example-index' docker compose -p korap up
+COMPOSE_PROFILES=open INDEX=./index docker compose -p korap up -d
 ```
 
-It's also possible to download the sample index provided by
-[Kustvakt](https://github.com/KorAP/Kustvakt/tree/master/sample-index).
-To download, intialize and run KorAP pointing to that index folder
-(in this example stored in the `index` folder in the local directory),
-run
+Set `KALAMAR_PORT` if port `64543` is already in use. For example,
+`KALAMAR_PORT=127.0.0.1:3543` serves the UI at `http://localhost:3543`.
+
+### Run with login
+
+Stop the `open` profile before starting `auth`. Create `data/` for the
+Kustvakt configuration and start the authenticated profile:
 
 ```shell
-COMPOSE_PROFILES="open" INDEX=./index docker compose -p korap up
+mkdir -p data
+COMPOSE_PROFILES=auth INDEX=./index docker compose -p korap up -d
 ```
 
-This will make the frontend be available at
-`localhost:64543`.
+The default test login is `user1` with password `password1`. Configure access
+policies in `data/kustvakt.conf`, which Compose creates on first start. See
+[Kustvakt's LDAP settings](https://github.com/KorAP/Kustvakt/wiki/LDAP-Setting)
+for custom authentication.
 
-To use a different host port (e.g. to run alongside an existing
-KorAP installation), set `KALAMAR_PORT`. It may include a bind address,
-e.g. to make the frontend only reachable locally or via an SSH tunnel:
+## Customize your instance
 
-```shell
-KALAMAR_PORT=127.0.0.1:3543 COMPOSE_PROFILES="open" INDEX=./index docker compose -p korap up
-```
-
-To use your own index, please follow the instructions
-on [Corpus Conversion](#corpus-conversion) first.
-
-To run the service with a user management system, first create a directory
-`data` in your working directory and then start it with
-
-```shell
-COMPOSE_PROFILES="auth" INDEX=./index docker compose -p korap up
-```
-
-Login with `user1` and `password1`. To change authentication settings, see the `/kustvakt/ldap` folder inside the docker container and Kustvakt's [LDAP Settings Wiki](https://github.com/KorAP/Kustvakt/wiki/LDAP-Setting) for documentation.
-
-On first start, Kustvakt's default configuration is copied to `data/kustvakt.conf`, where it can be adjusted (e.g. `ldap.config` or the `availability.regex.*` access policies). It is not overwritten on later starts, so remove it to get the default configuration of a newer Kustvakt image.
-
-## Host identity for maintenance notices
-
-On Linux, the Kalamar services use `uts: host` to discover the physical host's
-name automatically. This works with Docker and rootless Podman. There is no
-hostname to maintain when copying the deployment or renaming a server; restart
-Kalamar after a rename so the calendar refreshes its host identity.
-
-When enabling the optional downtime calendar in your instance configuration,
-leave `KORAP_HOSTNAME` unset for automatic discovery. To keep a fixed calendar
-identity, set `KORAP_HOSTNAME` explicitly; it overrides automatic discovery.
-The calendar remains optional and is not enabled by this Compose setting.
-
-## Describing Your Own Corpus
-
-The documentation pages of the user interface can be adapted without rebuilding
-the Kalamar image: the `custom/` directory of this repository is mounted into
-the container, and Kalamar serves a documentation page from there whenever it
-does not ship one itself. To describe the corpus you are serving, copy the
-example and edit it:
-
-```shell
-cp custom/doc/corpus.html.ep.example custom/doc/corpus.html.ep
-$EDITOR custom/doc/corpus.html.ep
-docker compose restart kalamar
-```
-
-The page is then served at `/doc/corpus`. Kalamar's documentation menu has no
-corpus entry of its own; to add one, mount your own `templates/doc/navigation.json`
-over the one Kalamar ships. `custom/` also contains examples for a references
-page listing how to cite your corpus. See [custom/README.md](custom/README.md)
-for details, and set `KALAMAR_TEMPLATES` to keep the templates somewhere else:
-
-```shell
-KALAMAR_TEMPLATES=/path/to/my-templates COMPOSE_PROFILES="open" INDEX=./index docker compose -p korap up
-```
-
-This requires Kalamar 0.66 or later.
-
-## Serving via HTTPS
-
-The export is built into Kalamar, which reaches the export service through
-its internal proxy at `/export/`. No separate public port and no further
-setting is needed for the export service, also if Kalamar is served via
-HTTPS (e.g. behind a reverse proxy).
-
-When upgrading from the iframe export, remove custom Export entries from
-plugin lists and proxy mappings for `/plugin/export/`. `KALAMAR_EXPORT_URL`
-is no longer used. The reverse proxy should forward all Kalamar paths,
-including `/export/`; it needs no separate rule for the export service.
-
-## Customizing the Configuration
-
-To adapt Kalamar's configuration beyond the environment variables above
-(e.g. the title addon, localization or plugins), copy the example
-configuration and edit it:
-
-```shell
-cp conf/kalamar.conf.example conf/kalamar.conf
-```
-
-If `conf/kalamar.conf` exists, it replaces the configuration shipped with
-the Kalamar image. See [conf/README.md](conf/README.md) for details, and set
-`KALAMAR_CONF_DIR` to keep the configuration somewhere else.
-
-## Corpus Conversion
-
-As of June 2026, the corpus conversion, annotation and indexing process has been significantly simplified and is now orchestrated by [KorAP-Ingestion](https://github.com/KorAP/KorAP-Ingestion). In many cases, a simple `make` command is sufficient to ingest your TEI XML data and launch your own KorAP instance. For comprehensive instructions and advanced options, please refer to the [KorAP-Ingestion](https://github.com/KorAP/KorAP-Ingestion) documentation.
+- To describe your corpus, copy `custom/doc/corpus.html.ep.example` to
+  `custom/doc/corpus.html.ep`, edit it, and restart Kalamar. The page appears
+  at `/doc/corpus`. See [custom/README.md](custom/README.md) for more examples.
+- To change Kalamar settings, copy `conf/kalamar.conf.example` to
+  `conf/kalamar.conf` and edit it. See [conf/README.md](conf/README.md).
+- To serve KorAP over HTTPS, point your reverse proxy at Kalamar and forward
+  all paths, including `/export/`.
+- On Linux, maintenance notices use the physical hostname automatically.
+  Set `KORAP_HOSTNAME` if your calendar uses a fixed hostname. Restart Kalamar
+  after renaming the host.
 
 ## Windows
 
-Windows with Powershell requires environment variables to pass in a different way.
-In addition the `PWD` variable is not set beforehand. To run the KorAP one-liner
-with Windows, you have to start
+After cloning the repository and changing into its directory, run the example
+in PowerShell:
 
 ```powershell
-$env:INDEX='example-index'; $env:PWD='.'; $env:COMPOSE_PROFILES='open,example'; docker compose -p korap up
-
+$env:INDEX = 'example-index'
+$env:PWD = (Get-Location).Path
+$env:COMPOSE_PROFILES = 'open,example'
+docker compose -p korap up -d
 ```
+
+Open [http://localhost:64543](http://localhost:64543) and search for `geht`.
+Use `down` in place of `up -d` to stop the example.
+
+## Rootless Podman on Linux
+
+With [Podman](https://podman.io/), point `docker compose` at the user socket
+and run the same commands as above:
+
+```shell
+systemctl --user enable --now podman.socket
+export DOCKER_HOST="unix://$XDG_RUNTIME_DIR/podman/podman.sock"
+```
+
+To keep containers running across logout and reboot, run
+`loginctl enable-linger "$USER"` and `systemctl --user enable podman-restart`.
+Use `docker compose` with the socket for the `auth` profile, which needs to wait
+for its init containers. `podman-compose` supports the `open` profile.
 
 ## Development and License
 
